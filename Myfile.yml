@@ -1,0 +1,24 @@
+##
+## EPITECH PROJECT, 2020
+## libgote
+## File description:
+## This file describes the project's dependencies and allowed functions.
+##
+
+name: libgote.a
+
+type: lib
+
+namespace: gote
+
+dependencies: libmy
+
+allowed: write malloc free
+
+main: ./src/main.c
+
+src:
+  - ./src/lib.c
+
+tests_src:
+  - ./tests/main.c
