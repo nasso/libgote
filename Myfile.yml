@@ -15,8 +15,6 @@ dependencies: libmy
 
 allowed: write malloc free
 
-main: ./src/main.c
-
 src:
   - ./src/lib.c
 
