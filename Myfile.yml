@@ -16,7 +16,12 @@ dependencies: libmy
 allowed: write malloc free
 
 src:
-  - ./src/lib.c
+  - ./src/ecs/world/create.c
+  - ./src/ecs/world/destroy.c
+  - ./src/ecs/world/get.c
+  - ./src/ecs/world/insert.c
+  - ./src/ecs/world/register.c
+  - ./src/ecs/world/remove.c
 
 tests_src:
-  - ./tests/main.c
+  - ./tests/world.c

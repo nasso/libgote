@@ -123,6 +123,7 @@ $(DEPSARC):
 $(OUTDIR)/%.o: %.c | $(OUTDIR)
 	@printf '\r  \033[K\033[0;32mCompiling\033[0m `$<`\n'
 	@mkdir -p $(dir $@)
+	@rm -f $(patsubst %.o,%.gcda,$@) $(patsubst %.o,%.gcno,$@)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 $(OUTDIR):

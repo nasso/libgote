@@ -11,7 +11,7 @@ type: bin
 
 namespace: ex
 
-dependencies: libmy libgote
+dependencies: libgote libmy
 
 allowed: write malloc free
 
