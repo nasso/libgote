@@ -21,6 +21,8 @@ src:
   - ./src/ecs/dispatcher/dispose.c
   - ./src/ecs/dispatcher/run.c
   - ./src/ecs/dispatcher/setup.c
+  - ./src/ecs/storage/storage.c
+  - ./src/ecs/storage/vec_storage.c
   - ./src/ecs/world/create.c
   - ./src/ecs/world/destroy.c
   - ./src/ecs/world/get.c
@@ -30,4 +32,5 @@ src:
 
 tests_src:
   - ./tests/dispatcher.c
+  - ./tests/storage.c
   - ./tests/world.c

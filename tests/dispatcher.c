@@ -48,7 +48,9 @@ static gt_system_t *dummy_system(void)
     return (self);
 }
 
-Test(dispatcher, create_and_destroy_empty, .timeout = 1.0)
+TestSuite(dispatcher, .timeout = 1.0);
+
+Test(dispatcher, create_and_destroy_empty)
 {
     gt_dispatcher_t *dp = gt_dispatcher_create(0);
 
@@ -56,7 +58,7 @@ Test(dispatcher, create_and_destroy_empty, .timeout = 1.0)
     gt_dispatcher_destroy(dp);
 }
 
-Test(dispatcher, create_and_destroy_not_empty, .timeout = 1.0)
+Test(dispatcher, create_and_destroy_not_empty)
 {
     gt_dispatcher_t *dp = gt_dispatcher_create(1, dummy_system());
 
@@ -64,7 +66,7 @@ Test(dispatcher, create_and_destroy_not_empty, .timeout = 1.0)
     gt_dispatcher_destroy(dp);
 }
 
-Test(dispatcher, common_system_lifecycle, .timeout = 1.0)
+Test(dispatcher, common_system_lifecycle)
 {
     gt_world_t *wld = gt_world_create();
     gt_dispatcher_t *dp = gt_dispatcher_create(1, dummy_system());
@@ -82,7 +84,7 @@ Test(dispatcher, common_system_lifecycle, .timeout = 1.0)
     gt_world_destroy(wld);
 }
 
-Test(dispatcher, complex_system_lifecycle, .timeout = 1.0)
+Test(dispatcher, complex_system_lifecycle)
 {
     gt_world_t *wld = gt_world_create();
     gt_dispatcher_t *dp = gt_dispatcher_create(2, dummy_system(),

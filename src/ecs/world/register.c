@@ -14,9 +14,7 @@ static void destroy_storage_callback(void *ptr)
 {
     gt_storage_t *storage = ptr;
 
-    if (storage && storage->destroy)
-        storage->destroy(storage->self);
-    my_free(storage);
+    gt_storage_destroy(storage);
 }
 
 bool gt_world_register(gt_world_t *self, const char *key,
