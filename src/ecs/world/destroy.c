@@ -8,6 +8,7 @@
 #include "my/my.h"
 #include "my/collections/hash_map.h"
 #include "gote/ecs/world.h"
+#include "gote/ecs/world_priv.h"
 
 static int destroy_resource_callback(void *user_data, hash_map_pair_t *pair)
 {

@@ -8,6 +8,7 @@
 #include "my/my.h"
 #include "my/collections/hash_map.h"
 #include "gote/ecs/world.h"
+#include "gote/ecs/world_priv.h"
 
 void *gt_world_get(const gt_world_t *self, const char *key)
 {

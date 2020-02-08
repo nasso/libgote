@@ -29,8 +29,16 @@ src:
   - ./src/ecs/world/insert.c
   - ./src/ecs/world/register.c
   - ./src/ecs/world/remove.c
+  - ./src/event/channel/create.c
+  - ./src/event/channel/destroy.c
+  - ./src/event/channel/discard_all.c
+  - ./src/event/channel/poll.c
+  - ./src/event/channel/push.c
+  - ./src/event/channel/sub.c
+  - ./src/event/channel/unsub.c
 
 tests_src:
-  - ./tests/dispatcher.c
-  - ./tests/storage.c
-  - ./tests/world.c
+  - ./tests/ecs/dispatcher.c
+  - ./tests/ecs/storage.c
+  - ./tests/ecs/world.c
+  - ./tests/event/channel.c

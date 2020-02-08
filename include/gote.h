@@ -9,5 +9,6 @@
 #define LIBGOTE_H
 
 #include "gote/ecs.h"
+#include "gote/event.h"
 
 #endif /* LIBGOTE_H */

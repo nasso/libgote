@@ -8,6 +8,7 @@
 #include "my/my.h"
 #include "my/collections/hash_map.h"
 #include "gote/ecs/world.h"
+#include "gote/ecs/world_priv.h"
 
 bool gt_world_insert(gt_world_t *self,  const char *key, void *data, void
     (*destroyer)(void*))

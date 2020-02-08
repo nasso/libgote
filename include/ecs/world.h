@@ -14,12 +14,6 @@
 #include "my/collections/hash_map.h"
 #include "gote/ecs/storage.h"
 
-//! \brief Structure holding a resource and a pointer to its destructor.
-typedef struct gt_resource {
-    void (*destroyer)(void *self);
-    void *self;
-} gt_resource_t;
-
 //! \brief A container for resources.
 typedef struct gt_world {
     hash_map_t *resources;
