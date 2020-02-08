@@ -15,7 +15,7 @@ static void destroy_storage_callback(void *ptr)
     gt_storage_t *storage = ptr;
 
     if (storage && storage->destroy)
-        storage->destroy(storage->data);
+        storage->destroy(storage->self);
     my_free(storage);
 }
 

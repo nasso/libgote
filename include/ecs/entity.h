@@ -8,13 +8,14 @@
 #ifndef LIBGOTE_ECS_ENTITY_H
 #define LIBGOTE_ECS_ENTITY_H
 
+//! \file include/ecs/entity.h
+
 #include "my/types.h"
 
-//! \file include/ecs/entity.h
-//! \typedef gt_entity_t
-//! \brief An entity is just an identifier that has corresponding components.
+//! \brief An entity is just an identifier (that can be used to index storages).
+//! \see gt_storage_t
 typedef struct gt_entity {
-    u32_t id;
+    u64_t id;
 } gt_entity_t;
 
 #endif /* LIBGOTE_ECS_ENTITY_H */

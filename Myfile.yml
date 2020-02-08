@@ -16,6 +16,11 @@ dependencies: libmy
 allowed: write malloc free
 
 src:
+  - ./src/ecs/dispatcher/create.c
+  - ./src/ecs/dispatcher/destroy.c
+  - ./src/ecs/dispatcher/dispose.c
+  - ./src/ecs/dispatcher/run.c
+  - ./src/ecs/dispatcher/setup.c
   - ./src/ecs/world/create.c
   - ./src/ecs/world/destroy.c
   - ./src/ecs/world/get.c
@@ -24,4 +29,5 @@ src:
   - ./src/ecs/world/remove.c
 
 tests_src:
+  - ./tests/dispatcher.c
   - ./tests/world.c

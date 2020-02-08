@@ -15,5 +15,5 @@ void *gt_world_get(const gt_world_t *self, const char *key)
 
     if (res == NULL)
         return (NULL);
-    return (res->data);
+    return (res->self);
 }

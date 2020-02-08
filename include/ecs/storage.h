@@ -8,22 +8,20 @@
 #ifndef LIBGOTE_ECS_STORAGE_H
 #define LIBGOTE_ECS_STORAGE_H
 
-#include "my/types.h"
-#include "gote/ecs/entity.h"
-
 //! \file include/ecs/storage.h
-//! \typedef gt_storage_t
-//! \brief A structure of function pointers for a particular type of
-//! \ref gt_storage_t.
+
+#include "my/types.h"
+
+//! \brief An abstract collection of elements identified by a \c u64_t.
 //!
-//! Examples of storage type implementations include \ref gt_vec_storage_t,
+//! Examples of storage implementations include \ref gt_vec_storage_t,
 //! \ref gt_map_storage_t or \ref gt_dense_vec_storage_t.
 typedef struct gt_storage {
-    void *data;
-    void (*destroy)(void*);
-    bool (*insert)(void*, gt_entity_t*, void*);
-    void *(*get)(void*, gt_entity_t*);
-    void *(*remove)(void*, gt_entity_t*);
+    void (*destroy)(void *self);
+    bool (*insert)(void *self, u64_t id, void *data);
+    void *(*get)(void *self, u64_t id);
+    void *(*remove)(void *self, u64_t id);
+    void *self;
 } gt_storage_t;
 
 #endif /* LIBGOTE_ECS_STORAGE_H */

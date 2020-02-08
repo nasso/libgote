@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2020
 ** libgote
 ** File description:
-** Unit tests
+** gt_world_t tests
 */
 
 #include <criterion/criterion.h>
@@ -29,6 +29,11 @@ Test(world, create_and_destroy_empty, .timeout = 1.0)
 
     cr_assert_not_null(wld);
     gt_world_destroy(wld);
+}
+
+Test(world, destroy_null, .timeout = 1.0)
+{
+    gt_world_destroy(NULL);
 }
 
 Test(world, add_resource, .timeout = 1.0)
@@ -85,8 +90,8 @@ Test(world, register_storage, .timeout = 1.0, .init = redirect_all)
     gt_world_t *wld = gt_world_create();
     gt_storage_t dummy;
 
-    dummy.data = my_malloc(sizeof(i32_t));
-    *((i32_t*) dummy.data) = 1;
+    dummy.self = my_malloc(sizeof(i32_t));
+    *((i32_t*) dummy.self) = 1;
     dummy.destroy = &loud_i32_free;
     dummy.insert = NULL;
     dummy.get = NULL;

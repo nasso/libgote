@@ -15,7 +15,7 @@ static int destroy_resource_callback(void *user_data, hash_map_pair_t *pair)
 
     (void)(user_data);
     if (res && res->destroyer)
-        res->destroyer(res->data);
+        res->destroyer(res->self);
     my_free(res);
     return (0);
 }

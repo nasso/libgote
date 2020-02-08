@@ -17,7 +17,7 @@ bool gt_world_insert(gt_world_t *self,  const char *key, void *data, void
     if (res == NULL)
         return (true);
     res->destroyer = destroyer;
-    res->data = data;
+    res->self = data;
     hash_map_insert(self->resources, key, res);
     return (false);
 }
