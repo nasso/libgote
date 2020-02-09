@@ -12,6 +12,12 @@
 
 #include "my/types.h"
 
+//! \brief An event channel.
+//!
+//! Event channels have a ring buffer of events. Subscribing to a channel gives
+//! you a handle you can use to poll events independently from other
+//! subscribers. Subscribers must regularly poll events, because the ring buffer
+//! will keep growing as long as there are subscribers with events pending!
 typedef struct gt_event_channel gt_event_channel_t;
 
 //! \brief Create a new event channel.

@@ -10,5 +10,6 @@
 
 #include "gote/ecs.h"
 #include "gote/event.h"
+#include "gote/state.h"
 
 #endif /* LIBGOTE_H */

@@ -13,7 +13,7 @@ namespace: gote
 
 dependencies: libmy
 
-allowed: write malloc free
+allowed: write malloc free calloc memmove memcpy memset read open close
 
 src:
   - ./src/ecs/dispatcher/create.c
