@@ -117,7 +117,7 @@ Test(event_channel, poll_after_unsub)
     gt_event_channel_push(chan, "\xAB");
     gt_event_channel_unsub(chan, handle);
     gt_event_channel_push(chan, "\xCD");
-    cr_expect_not(gt_event_channel_poll(chan, handle, NULL));
+    cr_assert_not(gt_event_channel_poll(chan, handle, NULL));
     gt_event_channel_destroy(chan);
 }
 
@@ -129,6 +129,41 @@ Test(event_channel, discard_all)
     gt_event_channel_push(chan, "\xAB");
     gt_event_channel_push(chan, "\xCD");
     gt_event_channel_discard_all(chan, handle);
-    cr_expect_not(gt_event_channel_poll(chan, handle, NULL));
+    cr_assert_not(gt_event_channel_poll(chan, handle, NULL));
     gt_event_channel_destroy(chan);
+}
+
+Test(event_channel, grow_buffer)
+{
+    gt_event_channel_t *chan = gt_event_channel_create(sizeof(u16_t));
+    u64_t first = gt_event_channel_sub(chan);
+    u16_t val = 0;
+
+    gt_event_channel_push(chan, "\x01");
+    gt_event_channel_push(chan, "\x02");
+    gt_event_channel_push(chan, "\x03");
+    gt_event_channel_push(chan, "\x04");
+    gt_event_channel_push(chan, "\x05");
+    cr_assert(gt_event_channel_poll(chan, first, &val));
+    cr_assert_eq(val, 0x01, "actual value: 0x%hx", val);
+    cr_assert(gt_event_channel_poll(chan, first, &val));
+    cr_assert_eq(val, 0x02, "actual value: 0x%hx", val);
+}
+
+Test(event_channel, one_blocking_grow)
+{
+    gt_event_channel_t *chan = gt_event_channel_create(sizeof(u16_t));
+    u64_t handle = 0;
+    u16_t val = 0;
+
+    gt_event_channel_push(chan, "\x01");
+    gt_event_channel_push(chan, "\x02");
+    handle = gt_event_channel_sub(chan);
+    gt_event_channel_push(chan, "\x03");
+    gt_event_channel_push(chan, "\x04");
+    gt_event_channel_push(chan, "\x05");
+    gt_event_channel_push(chan, "\x06");
+    gt_event_channel_push(chan, "\x07");
+    cr_assert(gt_event_channel_poll(chan, handle, &val));
+    cr_assert_eq(val, 0x03, "actual value: 0x%hX", val);
 }
