@@ -36,9 +36,13 @@ src:
   - ./src/event/channel/push.c
   - ./src/event/channel/sub.c
   - ./src/event/channel/unsub.c
+  - ./src/state/data.c
+  - ./src/state/trans.c
 
 tests_src:
   - ./tests/ecs/dispatcher.c
   - ./tests/ecs/storage.c
   - ./tests/ecs/world.c
   - ./tests/event/channel.c
+  - ./tests/state/data.c
+  - ./tests/state/trans.c
