@@ -36,6 +36,13 @@ src:
   - ./src/event/channel/push.c
   - ./src/event/channel/sub.c
   - ./src/event/channel/unsub.c
+  - ./src/state/state/destroy.c
+  - ./src/state/state/on_pause.c
+  - ./src/state/state/on_resume.c
+  - ./src/state/state/on_start.c
+  - ./src/state/state/on_stop.c
+  - ./src/state/state/shadow_update.c
+  - ./src/state/state/update.c
   - ./src/state/data.c
   - ./src/state/trans.c
 
@@ -45,4 +52,5 @@ tests_src:
   - ./tests/ecs/world.c
   - ./tests/event/channel.c
   - ./tests/state/data.c
+  - ./tests/state/state.c
   - ./tests/state/trans.c
