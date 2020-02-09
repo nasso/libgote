@@ -10,15 +10,15 @@
 
 //! \file include/state/machine.h
 
-#include "my/my.h"
-#include "gote/state/data.h"
-#include "gote/state/state.h"
-#include "gote/state/trans.h"
-
 //! \brief A simple state machine.
 //!
 //! The machine is automatically destroyed when all the states have been popped.
 typedef struct gt_state_machine gt_state_machine_t;
+
+#include "my/my.h"
+#include "gote/state/data.h"
+#include "gote/state/state.h"
+#include "gote/state/trans.h"
 
 //! \brief Create a new state machine with the given initial state.
 //! \param initial_state The initial state.

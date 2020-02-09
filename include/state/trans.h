@@ -8,6 +8,8 @@
 #ifndef LIBGOTE_STATE_TRANS_H
 #define LIBGOTE_STATE_TRANS_H
 
+//! \file include/state/trans.h
+
 #include "gote/state/state.h"
 
 //! \brief Type representing transitions between states in a state machine.
