@@ -21,7 +21,7 @@ MAKE_SHOUTER(start)
 MAKE_SHOUTER(stop)
 MAKE_SHOUTER(pause)
 MAKE_SHOUTER(resume)
-MAKE_SHOUTER(shadow_update)
+MAKE_SHOUTER(shadow)
 
 static gt_state_trans_t shout_update(void *self, gt_state_data_t *data)
 {
@@ -43,7 +43,7 @@ static gt_state_t *loud_state(i32_t *val)
     self->on_stop = &shout_stop;
     self->on_pause = &shout_pause;
     self->on_resume = &shout_resume;
-    self->shadow_update = &shout_shadow_update;
+    self->shadow_update = &shout_shadow;
     self->update = &shout_update;
     self->destroy = &shout_destroy;
     return (self);
@@ -217,5 +217,29 @@ Test(state_machine, trans_switch)
     gt_state_machine_destroy(mach);
     cr_assert_stdout_eq_str(
         "start 4 8;stop 4 8;destroy 4;start 2 8;stop 2 8;destroy 2;"
+    );
+}
+
+Test(state_machine, update_stack)
+{
+    i32_t data_val = 8;
+    i32_t val = 4;
+    i32_t val2 = 2;
+    gt_state_data_t *data = gt_state_data_create(NULL, &data_val);
+    gt_state_machine_t *mach = gt_state_machine_create(loud_state(&val));
+    gt_state_trans_t trans = gt_state_trans_push(loud_state(&val2));
+
+    cr_assert_not(gt_state_machine_update(mach, data));
+    cr_assert_not(gt_state_machine_start(mach, data));
+    cr_assert_not(gt_state_machine_update(mach, data));
+    cr_assert_not(gt_state_machine_trans(mach, &trans, data));
+    cr_assert_not(gt_state_machine_update(mach, data));
+    trans = gt_state_trans_quit();
+    cr_assert_not(gt_state_machine_trans(mach, &trans, data));
+    cr_assert_not(gt_state_machine_update(mach, data));
+    gt_state_machine_destroy(mach);
+    cr_assert_stdout_eq_str(
+        "start 4 8;update 4 8;shadow 4 8;pause 4 8;start 2 8;update 2 8;"
+        "shadow 2 8;shadow 4 8;stop 2 8;destroy 2;stop 4 8;destroy 4;"
     );
 }
