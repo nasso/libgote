@@ -10,15 +10,13 @@
 
 //! \file include/state/data.h
 
-//! \brief The data shared by all states of a state machine.
-typedef struct gt_state_data gt_state_data_t;
-
 #include "gote/ecs/world.h"
 
-struct gt_state_data {
+//! \brief The data shared by all states of a state machine.
+typedef struct gt_state_data {
     gt_world_t *world;
     void *data;
-};
+} gt_state_data_t;
 
 //! \brief Create a new \ref gt_state_data_t instance.
 //! \param world The associated \ref gt_world_t.

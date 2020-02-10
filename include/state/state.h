@@ -16,6 +16,7 @@ typedef struct gt_state gt_state_t;
 #include "gote/state/trans.h"
 #include "gote/state/data.h"
 
+//! \brief A game state.
 struct gt_state {
     void (*on_start)(void *self, gt_state_data_t *data);
     void (*on_stop)(void *self, gt_state_data_t *data);
