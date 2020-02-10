@@ -8,9 +8,8 @@
 #include "my/my.h"
 #include "gote/state/state.h"
 
-bool gt_state_on_start(gt_state_t *state, gt_state_data_t *data)
+void gt_state_on_start(gt_state_t *state, gt_state_data_t *data)
 {
     if (state->on_start)
-        return (state->on_start(state->self, data));
-    return (false);
+        state->on_start(state->self, data);
 }

@@ -27,17 +27,14 @@ gt_state_machine_t *gt_state_machine_create(gt_state_t *initial_state);
 
 //! \brief Destroy a state machine.
 //!
-//! Any remaining state is forcefully destroyed.
-//! \note In most cases, you don't need to call this method, as it is called
-//! automatically when the root state is popped out of the machine.
+//! Any remaining state is forcefully destroyed (\c on_stop is \b NOT called).
 //! \param self The state machine to be destroyed.
 void gt_state_machine_destroy(gt_state_machine_t *self);
 
 //! \brief Check if a state machine is still running.
 //! \param self The state machine.
-//! \return \c true if the machine has any state left on its stack, \c false
-//! otherwise.
-bool gt_state_machine_is_alive(gt_state_machine_t *self);
+//! \return \c true if the machine is currently running, \c false otherwise.
+bool gt_state_machine_is_running(gt_state_machine_t *self);
 
 //! \brief Start the state machine.
 //! \param self The state machine.

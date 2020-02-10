@@ -11,19 +11,23 @@
 #include "my/io.h"
 #include "gote/gote.h"
 
-#define MAKE_SHOUTER(name, ret_type, ret_val) \
-    static ret_type shout_##name(void *self, gt_state_data_t *data) \
+#define MAKE_SHOUTER(name) \
+    static void shout_##name(void *self, gt_state_data_t *data) \
     { \
         my_printf(#name " %d %d;", *((i32_t*) self), *((i32_t*) data->data)); \
-        return (ret_val); \
     }
 
-MAKE_SHOUTER(start, bool, false)
-MAKE_SHOUTER(stop, bool, false)
-MAKE_SHOUTER(pause, bool, false)
-MAKE_SHOUTER(resume, bool, false)
-MAKE_SHOUTER(shadow_update, bool, false)
-MAKE_SHOUTER(update, gt_state_trans_t, gt_state_trans_none())
+MAKE_SHOUTER(start)
+MAKE_SHOUTER(stop)
+MAKE_SHOUTER(pause)
+MAKE_SHOUTER(resume)
+MAKE_SHOUTER(shadow_update)
+
+static gt_state_trans_t shout_update(void *self, gt_state_data_t *data)
+{
+    my_printf("update %d %d;", *((i32_t*) self), *((i32_t*) data->data));
+    return (gt_state_trans_none());
+}
 
 static void shout_destroy(void *self)
 {
@@ -54,13 +58,13 @@ Test(state, simple_lifecyle)
     gt_state_t *state = state_that_shouts_very_loud(&val);
     gt_state_data_t *data = gt_state_data_create(NULL, &val2);
 
-    cr_assert_not(gt_state_on_start(state, data));
+    gt_state_on_start(state, data);
     cr_assert_eq(gt_state_update(state, data).type, GT_STATE_TRANS_NONE);
-    cr_assert_not(gt_state_shadow_update(state, data));
-    cr_assert_not(gt_state_on_pause(state, data));
-    cr_assert_not(gt_state_shadow_update(state, data));
-    cr_assert_not(gt_state_on_resume(state, data));
-    cr_assert_not(gt_state_on_stop(state, data));
+    gt_state_shadow_update(state, data);
+    gt_state_on_pause(state, data);
+    gt_state_shadow_update(state, data);
+    gt_state_on_resume(state, data);
+    gt_state_on_stop(state, data);
     gt_state_data_destroy(data);
     gt_state_destroy(state);
     my_putchar('\n');
