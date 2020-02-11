@@ -15,9 +15,7 @@ static int destroy_system_callback(void *user_data, void *ptr)
     gt_system_t *system = ptr;
 
     (void)(user_data);
-    if (system && system->destroy)
-        system->destroy(system->self);
-    my_free(system);
+    gt_system_destroy(system);
     return (0);
 }
 

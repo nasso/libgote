@@ -13,12 +13,10 @@
 
 static int setup_system_callback(void *user_data, void *ptr)
 {
-    gt_world_t *wld = user_data;
+    gt_world_t *world = user_data;
     gt_system_t *sys = ptr;
 
-    if (sys->setup == NULL)
-        return (0);
-    return (sys->setup(sys->self, wld));
+    return (gt_system_setup(sys, world));
 }
 
 bool gt_dispatcher_setup(gt_dispatcher_t *self, gt_world_t *world)
