@@ -11,5 +11,6 @@
 #include "gote/ecs.h"
 #include "gote/event.h"
 #include "gote/state.h"
+#include "gote/game_data.h"
 
 #endif /* LIBGOTE_H */

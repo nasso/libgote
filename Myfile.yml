@@ -63,3 +63,4 @@ tests_src:
   - ./tests/state/machine.c
   - ./tests/state/state.c
   - ./tests/state/trans.c
+  - ./tests/game_data.c
