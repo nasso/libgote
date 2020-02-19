@@ -11,8 +11,17 @@ SHELL	=	/bin/sh
 
 MYFILE	=	Myfile.yml
 
-readcfg	=	$(strip \
-				$(shell sed -n '/^$(1):/,/^\S/s/^\s\+\-\|^$(1)://p' $(MYFILE)))
+define readcfg
+$(strip $(shell sed -n '/^$(1):/,/^\S/s/^\s\+\-\|^$(1)://p' $(MYFILE)))
+endef
+
+dep2name = $(shell echo $(1) | sed -En 's/^@?([^=]+).*/\1/p')
+
+dep2lib	= $(shell echo $(1) | sed -En 's/^@?lib([^=]+).*/-l\1/p')
+
+dep2ar	= $(shell echo $(1) | sed -En 's/^@?([^=]+).*/\1.a/p')
+
+dep2branch = $(shell echo $(1) | sed -En 's/^lib[^=]+=(.+)/\1/p')
 
 ALLOWED ?=	$(call readcfg,allowed)
 
@@ -41,7 +50,7 @@ CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
 
 CPPFLAGS =	-MD -MP
 
-LIBS	=	$(DEPS:lib%=-l%)
+LIBS	=	$(foreach dep,$(DEPS),$(call dep2lib,$(dep)))
 
 TEST	=	unit-tests
 
@@ -53,7 +62,7 @@ OUTTEST	=	$(OUTDIR)/$(TEST)
 
 CPPDEPS	=	$(SRC:%.c=$(OUTDIR)/%.d)
 
-DEPSARC	=	$(DEPS:%=$(LIBDIR)/%.a)
+DEPSARC	=	$(foreach dep,$(DEPS),$(LIBDIR)/$(call dep2ar,$(dep)))
 
 MAINOBJ	:=	$(MAINSRC:%.c=$(OUTDIR)/%.o)
 
@@ -65,8 +74,40 @@ COVREPS	=	$(SRC:%.c=$(OUTDIR)/%.gcda) $(SRC:.c=$(OUTDIR)/%.gcno) \
 			$(MAINSRC:.c=$(OUTDIR)/%.gcda) $(MAINSRC:.c=$(OUTDIR)/%.gcno) \
 			$(TESTSRC:.c=$(OUTDIR)/%.gcda) $(TESTSRC:.c=$(OUTDIR)/%.gcno)
 
-makelibs =	$(foreach lib,$(DEPS),$(MAKE) -sC $(LIBDIR) $(1) \
-				NAME=$(lib) LIBDIR=$(LIBDIR);)
+define makelibs
+	$(foreach dep,$(DEPS), \
+		$(if $(call dep2branch,$(dep)), \
+			$(MAKE) -sC $(LIBDIR) $(1) \
+				NAME=$(call dep2name,$(dep)) \
+				BRANCH=$(call dep2branch,$(dep)) \
+				LIBDIR=$(LIBDIR); \
+		) \
+	)
+endef
+
+define info_deps_head
+	@echo -n " ╭──────────────────────┬"
+	@echo -n "──────────────────────┬"
+	@echo "──────────────────────┬────────────╮"
+	@printf " │ %-20s │ %-20s │ %-20s │ %-10s │\n" 'Definition' 'CC argument' \
+		'File name' 'Branch'
+	@echo -n " ├──────────────────────┼"
+	@echo -n "──────────────────────┼"
+	@echo "──────────────────────┼────────────┤"
+endef
+
+define info_dep_line
+	@printf " │ %-20s │ %-20s │ %-20s │ %-10s │\n" '$(1)' \
+		'$(call dep2lib,$(1))' '$(call dep2ar,$(1))' '$(call dep2branch,$(1))'
+
+endef
+
+define info_deps_end
+	@echo -n " ╰──────────────────────┴"
+	@echo -n "──────────────────────┴"
+	@echo "──────────────────────┴────────────╯"
+endef
+
 
 export CC
 
@@ -85,9 +126,11 @@ info:
 	@echo -n "\033[0;32mallowed:\033[0m"
 	@for fn in $(ALLOWED); do echo -n " $$fn"; done
 	@echo
-	@echo -n "\033[0;32mdependencies:\033[0m"
-	@for dep in $(DEPS); do echo -n " $$dep"; done
-	@echo
+	@echo "\033[0;32mdependencies:\033[0m"
+	$(call info_deps_head)
+	$(foreach dep,$(DEPS),$(call info_dep_line,$(dep)))
+	$(call info_deps_end)
+	@echo "\033[0;32mlibs:\033[0m" $(LIBS)
 	@echo "\033[0;32mmain:\033[0m" $(MAINSRC)
 	@echo -n "\033[0;32msrc:\033[0m"
 	@if [ '$(VERBOSE)' ]; then \

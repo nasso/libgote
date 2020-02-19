@@ -22,6 +22,10 @@ ifeq ($(NAME),)
 	$(error must specify a value for NAME)
 endif
 
+ifeq ($(BRANCH),)
+	$(error must specify a value for BRANCH)
+endif
+
 all: $(NAME).a
 
 $(NAME).a: $(NAME)
@@ -29,8 +33,8 @@ $(NAME).a: $(NAME)
 	@$(call cpheader,$(NAME))
 
 $(NAME):
-	@printf '\r  \033[K\033[0;35m Fetching\033[0m `$@`\n'
-	@git clone -q $(REPO_PREFIX)/$(NAME)
+	@printf '\r  \033[K\033[0;35m Fetching\033[0m `$@` ($(BRANCH))\n'
+	@git clone -q $(REPO_PREFIX)/$(NAME) --branch=$(BRANCH)
 	@rm -rf $(NAME)/.git
 
 clean:
