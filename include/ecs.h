@@ -8,7 +8,10 @@
 #ifndef LIBGOTE_ECS_H
 #define LIBGOTE_ECS_H
 
-#include "my/types.h"
+//! \file include/ecs.h
+//! This header includes all the headers present in the `include/ecs/`
+//! directory.
+
 #include "gote/ecs/component.h"
 #include "gote/ecs/world.h"
 #include "gote/ecs/entity.h"

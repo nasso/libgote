@@ -8,6 +8,10 @@
 #ifndef LIBGOTE_STATE_H
 #define LIBGOTE_STATE_H
 
+//! \file include/state.h
+//! This header includes all the headers present in the `include/state/`
+//! directory.
+
 #include "gote/state/data.h"
 #include "gote/state/machine.h"
 #include "gote/state/state.h"

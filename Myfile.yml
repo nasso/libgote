@@ -19,6 +19,8 @@ dependencies:
 allowed: write malloc free calloc memmove memcpy memset read open close
 
 src:
+  - ./src/assets/handle.c
+  - ./src/assets/storage.c
   - ./src/ecs/dispatcher/create.c
   - ./src/ecs/dispatcher/destroy.c
   - ./src/ecs/dispatcher/dispose.c
