@@ -34,7 +34,7 @@ Test(game_data, create_and_destroy_empty)
     gt_game_data_destroy(gd);
 }
 
-Test(game_data, create_and_destory_not_empty)
+Test(game_data, create_and_destroy_not_empty)
 {
     gt_game_data_t *gd = gt_game_data_with(2, dummy_system(), dummy_system());
 

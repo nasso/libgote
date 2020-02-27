@@ -16,5 +16,6 @@
 #include "gote/state.h"
 #include "gote/game_data.h"
 #include "gote/assets.h"
+#include "gote/app.h"
 
 #endif /* LIBGOTE_H */

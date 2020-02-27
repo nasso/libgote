@@ -19,6 +19,9 @@ dependencies:
 allowed: write malloc free calloc memmove memcpy memset read open close
 
 src:
+  - ./src/app/create.c
+  - ./src/app/destroy.c
+  - ./src/app/run.c
   - ./src/assets/handle.c
   - ./src/assets/storage.c
   - ./src/ecs/dispatcher/create.c
@@ -68,4 +71,5 @@ tests_src:
   - ./tests/state/machine.c
   - ./tests/state/state.c
   - ./tests/state/trans.c
+  - ./tests/app.c
   - ./tests/game_data.c

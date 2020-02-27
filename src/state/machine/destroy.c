@@ -20,7 +20,8 @@ static int destroy_stack_callback(void *user_data, void *element)
 
 void gt_state_machine_destroy(gt_state_machine_t *self)
 {
-    if (self != NULL)
-        list_destroy_with(self->stack, &destroy_stack_callback, NULL);
+    if (self == NULL)
+        return;
+    list_destroy_with(self->stack, &destroy_stack_callback, NULL);
     my_free(self);
 }
