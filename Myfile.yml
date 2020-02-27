@@ -13,8 +13,6 @@ namespace: gote
 
 dependencies:
   - libmy=feat-rc
-  - @libcsfml-graphics
-  - @libcsfml-system
 
 allowed: write malloc free calloc memmove memcpy memset read open close
 
