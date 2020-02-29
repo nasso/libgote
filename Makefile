@@ -169,9 +169,9 @@ $(OUTDIR)/%.o: %.c | $(OUTDIR)
 	@rm -f $(patsubst %.o,%.gcda,$@) $(patsubst %.o,%.gcno,$@)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
-$(OUTDIR):
+$(OUTDIR): $(abspath ./include)
 	@mkdir -p $@/include
-	@ln -s $(abspath ./include) $@/include/$(NAMESPC)
+	@ln -fs $(abspath ./include) $@/include/$(NAMESPC)
 
 $(TEST): $(OUTTEST)
 	@cp $(OUTTEST) $(TEST)
