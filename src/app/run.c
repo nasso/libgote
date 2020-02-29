@@ -16,8 +16,8 @@ bool gt_app_run(gt_app_t *self)
         .world = self->world,
     };
 
-    err = gt_state_machine_start(self->states, &state_data);
-    err = err || gt_dispatcher_setup(self->data->dispatcher, self->world);
+    err = gt_dispatcher_setup(self->data->dispatcher, self->world);
+    err = err || gt_state_machine_start(self->states, &state_data);
     while (!err && gt_state_machine_is_running(self->states)) {
         err = gt_state_machine_update(self->states, &state_data);
         err = err || gt_dispatcher_run(self->data->dispatcher, self->world);
