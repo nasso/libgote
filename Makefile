@@ -169,7 +169,7 @@ $(OUTDIR)/%.o: %.c | $(OUTDIR)
 	@rm -f $(patsubst %.o,%.gcda,$@) $(patsubst %.o,%.gcno,$@)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
-$(OUTDIR): $(abspath ./include)
+$(OUTDIR):
 	@mkdir -p $@/include
 	@ln -fs $(abspath ./include) $@/include/$(NAMESPC)
 

@@ -17,7 +17,11 @@ bool gt_app_run(gt_app_t *self)
     };
 
     err = gt_state_machine_start(self->states, &state_data);
-    while (!err && gt_state_machine_is_running(self->states))
+    err = err || gt_dispatcher_setup(self->data->dispatcher, self->world);
+    while (!err && gt_state_machine_is_running(self->states)) {
         err = gt_state_machine_update(self->states, &state_data);
+        err = err || gt_dispatcher_run(self->data->dispatcher, self->world);
+    }
+    err |= gt_dispatcher_dispose(self->data->dispatcher, self->world);
     return (err);
 }
