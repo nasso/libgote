@@ -20,6 +20,11 @@ typedef struct gt_app {
     gt_world_t *world;
     gt_state_machine_t *states;
     gt_game_data_t *data;
+    f64_t dt_ms;
+    f64_t time_ms;
+    struct {
+        u64_t trans_chan_sub;
+    } priv;
 } gt_app_t;
 
 //! \brief Create an application with the given systems.
