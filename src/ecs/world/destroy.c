@@ -25,6 +25,8 @@ void gt_world_destroy(gt_world_t *self)
 {
     if (self == NULL)
         return;
-    hash_map_destroy_with(self->resources, &destroy_resource_callback, NULL);
+    hash_map_destroy_with(self->resources, &destroy_resource_callback,
+        NULL);
+    list_destroy(self->entities);
     my_free(self);
 }

@@ -6,6 +6,7 @@
 */
 
 #include "my/my.h"
+#include "my/collections/list.h"
 #include "my/collections/hash_map.h"
 #include "gote/ecs/world.h"
 
@@ -16,7 +17,10 @@ gt_world_t *gt_world_create(void)
     if (self == NULL)
         return (NULL);
     self->resources = hash_map_new();
-    if (self->resources == NULL)
+    self->entities = list_new();
+    if (self->resources == NULL || self->entities == NULL) {
         gt_world_destroy(self);
+        return (NULL);
+    }
     return (self);
 }

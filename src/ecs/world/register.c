@@ -8,6 +8,7 @@
 #include "my/my.h"
 #include "my/collections/hash_map.h"
 #include "gote/ecs/storage.h"
+#include "gote/ecs/component.h"
 #include "gote/ecs/world.h"
 
 static void destroy_storage_callback(void *ptr)
@@ -17,13 +18,15 @@ static void destroy_storage_callback(void *ptr)
     gt_storage_destroy(storage);
 }
 
-bool gt_world_register(gt_world_t *self, const char *key,
-    const gt_storage_t *storage)
+bool gt_world_register(gt_world_t *self, const char *key, gt_storage_t *storage)
 {
-    gt_storage_t *storage_cpy = my_malloc(sizeof(gt_storage_t));
+    return (gt_world_insert(self, key, storage, &destroy_storage_callback));
+}
 
-    if (storage_cpy == NULL)
-        return (true);
-    my_memcpy(storage_cpy, storage, sizeof(gt_storage_t));
-    return (gt_world_insert(self, key, storage_cpy, &destroy_storage_callback));
+bool gt_world_register_component(gt_world_t *self,
+    const gt_component_class_t *class,
+    gt_storage_t *(*storage_ctor)(void (*)(void*)))
+{
+    return (gt_world_register(self, class->name,
+        storage_ctor(class->destroyer)));
 }

@@ -30,6 +30,7 @@ src:
   - ./src/ecs/storage/storage.c
   - ./src/ecs/storage/vec_storage.c
   - ./src/ecs/world/create.c
+  - ./src/ecs/world/create_entity.c
   - ./src/ecs/world/destroy.c
   - ./src/ecs/world/get.c
   - ./src/ecs/world/insert.c
