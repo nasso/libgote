@@ -11,22 +11,28 @@
 #include "gote/ecs/component.h"
 #include "gote/ecs/world.h"
 
-static void destroy_storage_callback(void *ptr)
-{
-    gt_storage_t *storage = ptr;
-
-    gt_storage_destroy(storage);
-}
-
 bool gt_world_register(gt_world_t *self, const char *key, gt_storage_t *storage)
 {
-    return (gt_world_insert(self, key, storage, &destroy_storage_callback));
+    return (gt_world_insert(self, key, storage,
+        (void (*)(void*)) &gt_storage_destroy));
 }
 
 bool gt_world_register_component(gt_world_t *self,
     const gt_component_class_t *class,
     gt_storage_t *(*storage_ctor)(void (*)(void*)))
 {
-    return (gt_world_register(self, class->name,
-        storage_ctor(class->destroyer)));
+    gt_storage_t *storage = NULL;
+
+    if (list_find(self->component_classes, (void*) class))
+        return (false);
+    else if (list_push_back(self->component_classes, (void*) class))
+        return (true);
+    storage = storage_ctor(class->destroyer);
+    if (storage == NULL)
+        return (true);
+    else if (gt_world_register(self, class->name, storage)) {
+        gt_storage_destroy(storage);
+        return (true);
+    }
+    return (false);
 }

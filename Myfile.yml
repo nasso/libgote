@@ -36,6 +36,7 @@ src:
   - ./src/ecs/world/insert.c
   - ./src/ecs/world/register.c
   - ./src/ecs/world/remove.c
+  - ./src/ecs/world/remove_entity.c
   - ./src/ecs/system.c
   - ./src/event/channel/create.c
   - ./src/event/channel/destroy.c

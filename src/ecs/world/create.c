@@ -18,7 +18,8 @@ gt_world_t *gt_world_create(void)
         return (NULL);
     self->resources = hash_map_new();
     self->entities = list_new();
-    if (self->resources == NULL || self->entities == NULL) {
+    self->component_classes = list_new();
+    if (!self->resources || !self->entities || !self->component_classes) {
         gt_world_destroy(self);
         return (NULL);
     }

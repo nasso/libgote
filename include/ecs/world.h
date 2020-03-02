@@ -21,6 +21,7 @@
 typedef struct gt_world {
     hash_map_t *resources;
     list_t *entities;
+    list_t *component_classes;
 } gt_world_t;
 
 //! \brief Create a new world.
@@ -62,15 +63,11 @@ void gt_world_remove(gt_world_t *self, const char *key);
 bool gt_world_register(gt_world_t *self, const char *key,
     gt_storage_t *storage);
 
-//! \brief Shorthand to insert a storage resource for a component class.
+//! \brief Register a component class in a world.
 //!
 //! The storage is created by calling the given constructor. It takes one
 //! argument which is the destructor (called to destroy components when they are
 //! removed).
-//! Equivalent to the following:
-//! ```c
-//! gt_world_register(self, class->name, storage_ctor(class->destroyer));
-//! ```
 //! \param self The world.
 //! \param class The \ref gt_component_class_t to create the storage for.
 //! \param storage_ctor The constructor of the storage.
@@ -78,7 +75,7 @@ bool gt_world_register_component(gt_world_t *self,
     const gt_component_class_t *class,
     gt_storage_t *(*storage_ctor)(void (*)(void*)));
 
-//! \brief Create a new entity in this world.
+//! \brief Create a new entity in a world.
 //!
 //! If any of the given component instance is a NULL pointer, all the components
 //! are destroyed.
@@ -115,5 +112,12 @@ gt_entity_t *gt_world_create_entity(gt_world_t *self, usize_t component_count,
 //! \return The newly created entity; \c NULL if an error occured.
 gt_entity_t *gt_world_create_entity_va(gt_world_t *self,
     usize_t component_count, va_list ap);
+
+//! \brief Remove an entity from a world.
+//!
+//! This function also destroys all components associated with the entity.
+//! \param self The world.
+//! \param entity The entity to be removed.
+void gt_world_remove_entity(gt_world_t *self, gt_entity_t *entity);
 
 #endif /* LIBGOTE_ECS_WORLD_H */

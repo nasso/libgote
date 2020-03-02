@@ -11,10 +11,16 @@
 #include "my/io.h"
 #include "gote/gote.h"
 
+static void health_component_destroy(void *data)
+{
+    my_printf("health free;");
+    my_free(data);
+}
+
 // Health component: class definition
 static const gt_component_class_t HEALTH_COMPONENT = {
     .name = "health_component",
-    .destroyer = &my_free
+    .destroyer = &health_component_destroy
 };
 
 // Health component: component data
@@ -200,4 +206,29 @@ Test(world, create_entity_with_components)
     cr_assert_eq(gt_storage_get(health_storage, ent->id), health_comp);
     cr_assert_eq(gt_storage_get(pos_storage, ent->id), pos_comp);
     gt_world_destroy(wld);
+}
+
+Test(world, remove_entity_without_components)
+{
+    gt_world_t *wld = gt_world_create();
+    gt_entity_t *ent1 = gt_world_create_entity(wld, 0);
+
+    gt_world_remove_entity(wld, ent1);
+    gt_world_destroy(wld);
+}
+
+Test(world, remove_entity_with_components)
+{
+    gt_world_t *wld = gt_world_create();
+    gt_entity_t *ent = NULL;
+    health_comp_t *health_comp = create_health_component(4.0);
+    pos_comp_t *pos_comp = create_pos_component(1.0, 3.0);
+
+    gt_world_register_component(wld, &HEALTH_COMPONENT, &gt_vec_storage);
+    gt_world_register_component(wld, &POS_COMPONENT, &gt_vec_storage);
+    ent = gt_world_create_entity(wld, 2, &HEALTH_COMPONENT, health_comp,
+        &POS_COMPONENT, pos_comp);
+    gt_world_remove_entity(wld, ent);
+    gt_world_destroy(wld);
+    cr_assert_stdout_eq_str("health free;");
 }
