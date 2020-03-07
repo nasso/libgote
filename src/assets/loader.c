@@ -33,5 +33,5 @@ gt_handle_t gt_load(const char *path, const gt_format_t *format,
 
     if (strg == NULL)
         return (NULL);
-    return (gt_asset_storage_push(strg, format->load(path)));
+    return (gt_asset_storage_push(strg, format->load(path, world)));
 }

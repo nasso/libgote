@@ -11,11 +11,12 @@
 //! \file include/assets/format.h
 
 #include "my/types.h"
+#include "gote/ecs.h"
 
 //! \brief A format defines how assets are to be loaded.
 typedef struct gt_format {
     const char *name;
-    void *(*load)(const char *path);
+    void *(*load)(const char *path, gt_world_t *world);
     void (*destroy)(void *data);
 } gt_format_t;
 
