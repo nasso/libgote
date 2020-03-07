@@ -67,6 +67,7 @@ static void gt_vec_storage_destroy(void *self_ptr)
     my_free(self->data);
     self->data = NULL;
     self->len = 0;
+    my_free(self);
 }
 
 gt_storage_t *gt_vec_storage(void (*destroy_item)(void *item))
