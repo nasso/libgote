@@ -16,7 +16,7 @@
 typedef struct gt_format {
     const char *name;
     void *(*load)(const char *path);
-    void *(*destroy)(void *data);
+    void (*destroy)(void *data);
 } gt_format_t;
 
 #endif /* LIBGOTE_ASSETS_FORMAT_H */
