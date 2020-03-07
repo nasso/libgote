@@ -12,10 +12,8 @@
 
 void gt_asset_handle_free(struct gt_asset_handle_data *data)
 {
-    void *asset = gt_storage_get(data->storage->storage, data->id);
-
     gt_storage_set(data->storage->storage, data->id, NULL);
-    data->storage->format->destroy(asset);
+    my_free(data);
 }
 
 gt_handle_t gt_handle_create(u64_t id, gt_asset_storage_t *storage)
