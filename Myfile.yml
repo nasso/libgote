@@ -21,6 +21,7 @@ src:
   - ./src/app/destroy.c
   - ./src/app/run.c
   - ./src/assets/handle.c
+  - ./src/assets/loader.c
   - ./src/assets/storage.c
   - ./src/ecs/dispatcher/create.c
   - ./src/ecs/dispatcher/destroy.c
