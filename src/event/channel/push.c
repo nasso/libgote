@@ -44,7 +44,7 @@ static bool grow_buffer(gt_event_channel_t *self)
     self->buffer = data;
     self->buf_size++;
     for (usize_t i = 0; i < self->sub_count; i++)
-        if (self->subs[i].is_some && self->subs[i].v >= self->cursor)
+        if (self->subs[i].is_some && self->subs[i].v > self->cursor)
             self->subs[i].v++;
     return (false);
 }

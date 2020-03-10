@@ -153,17 +153,15 @@ Test(event_channel, grow_buffer)
 Test(event_channel, one_blocking_grow)
 {
     gt_event_channel_t *chan = gt_event_channel_create(sizeof(u16_t));
-    u64_t handle = 0;
+    u64_t handle = gt_event_channel_sub(chan);
     u16_t val = 0;
 
-    gt_event_channel_push(chan, "\x01");
-    gt_event_channel_push(chan, "\x02");
-    handle = gt_event_channel_sub(chan);
-    gt_event_channel_push(chan, "\x03");
-    gt_event_channel_push(chan, "\x04");
-    gt_event_channel_push(chan, "\x05");
-    gt_event_channel_push(chan, "\x06");
-    gt_event_channel_push(chan, "\x07");
-    cr_assert(gt_event_channel_poll(chan, handle, &val));
-    cr_assert_eq(val, 0x03, "actual value: 0x%hX", val);
+    gt_event_channel_sub(chan);
+    for (usize_t i = 0; i < 300; i++) {
+        val = i;
+        cr_assert_not(gt_event_channel_push(chan, &val));
+        val = 0;
+        cr_assert(gt_event_channel_poll(chan, handle, &val));
+        cr_assert_eq(val, i);
+    }
 }
