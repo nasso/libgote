@@ -10,8 +10,8 @@
 #include "gote/ecs/world.h"
 #include "gote/ecs/world_priv.h"
 
-bool gt_world_insert(gt_world_t *self,  const char *key, void *data, void
-    (*destroyer)(void*))
+bool gt_world_insert(gt_world_t *self, const char *key, void *data,
+    void (*destroyer)(void*))
 {
     gt_resource_t *res = my_malloc(sizeof(gt_resource_t));
 
