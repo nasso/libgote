@@ -113,6 +113,23 @@ Test(world, remove_resource)
     gt_world_destroy(wld);
 }
 
+Test(world, overwrite_resource)
+{
+    i32_t *value1 = my_malloc(sizeof(i32_t));
+    i32_t *value2 = my_malloc(sizeof(i32_t));
+    gt_world_t *wld = gt_world_create();
+
+    *value1 = 1;
+    *value2 = 2;
+    gt_world_insert(wld, "foo", value1, &loud_i32_free);
+    gt_world_insert(wld, "foo", value2, &loud_i32_free);
+    my_printf("between\n");
+    gt_world_insert(wld, "foo", NULL, NULL);
+    my_printf("end\n");
+    cr_assert_stdout_eq_str("FREE 1\nbetween\nFREE 2\nend\n");
+    gt_world_destroy(wld);
+}
+
 Test(world, get_absent_resource)
 {
     gt_world_t *wld = gt_world_create();
