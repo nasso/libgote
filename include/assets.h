@@ -15,6 +15,5 @@
 #include "gote/assets/format.h"
 #include "gote/assets/handle.h"
 #include "gote/assets/loader.h"
-#include "gote/assets/storage.h"
 
 #endif /* LIBGOTE_ASSETS_H */

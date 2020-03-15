@@ -22,7 +22,6 @@ src:
   - ./src/app/run.c
   - ./src/assets/handle.c
   - ./src/assets/loader.c
-  - ./src/assets/storage.c
   - ./src/ecs/dispatcher/create.c
   - ./src/ecs/dispatcher/destroy.c
   - ./src/ecs/dispatcher/dispose.c
@@ -64,7 +63,6 @@ src:
   - ./src/game_data.c
 
 tests_src:
-  - ./tests/assets/storage.c
   - ./tests/ecs/dispatcher.c
   - ./tests/ecs/storage.c
   - ./tests/ecs/world.c
