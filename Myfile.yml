@@ -64,6 +64,7 @@ src:
   - ./src/game_data.c
 
 tests_src:
+  - ./tests/assets/storage.c
   - ./tests/ecs/dispatcher.c
   - ./tests/ecs/storage.c
   - ./tests/ecs/world.c

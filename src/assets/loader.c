@@ -10,17 +10,13 @@
 static gt_asset_storage_t *get_asset_storage(gt_world_t *world,
     const gt_format_t *format)
 {
-    gt_storage_t *strg = NULL;
     gt_asset_storage_t *asset_strg = gt_world_get(world, format->name);
 
     if (asset_strg)
         return (asset_strg);
-    strg = gt_vec_storage(format->destroy);
-    if (strg == NULL)
-        return (NULL);
-    asset_strg = gt_asset_storage_create(strg, format, 1);
+    asset_strg = gt_asset_storage_create(&gt_vec_storage, format, 1);
     if (asset_strg == NULL)
-        gt_storage_destroy(strg);
+        return (NULL);
     gt_world_insert(world, format->name, asset_strg,
         (void (*)(void*)) &gt_asset_storage_destroy);
     return (asset_strg);

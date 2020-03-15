@@ -22,12 +22,11 @@ typedef struct gt_asset_storage {
 
 //! \brief Create a new \c gt_asset_storage_t.
 //!
-//! This function "takes ownership" of the <code>gt_storage_t</code>! That means
-//! you should \b NOT attempt to use it after calling this function.
-//! \param storage The wrapped storage.
+//! \param storage_ctor A \c gt_storage_t constructor (see \ref gt_vec_storage).
 //! \param start The starting ID.
 //! \return A new \c gt_asset_storage_t.
-gt_asset_storage_t *gt_asset_storage_create(gt_storage_t *storage,
+gt_asset_storage_t *gt_asset_storage_create(
+    gt_storage_t *(*storage_ctor)(void (*)(void*)),
     const gt_format_t *format, u64_t start);
 
 //! \brief Destroy a \c gt_asset_storage_t.

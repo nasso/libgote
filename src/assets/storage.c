@@ -9,16 +9,21 @@
 #include "gote/ecs/storage.h"
 #include "gote/assets/storage.h"
 
-gt_asset_storage_t *gt_asset_storage_create(gt_storage_t *storage,
+gt_asset_storage_t *gt_asset_storage_create(
+    gt_storage_t *(*storage_ctor)(void (*)(void*)),
     const gt_format_t *format, u64_t start)
 {
-    gt_asset_storage_t *self = my_malloc(sizeof(gt_asset_storage_t));
+    gt_asset_storage_t *self = my_calloc(1, sizeof(gt_asset_storage_t));
 
     if (self == NULL)
         return (NULL);
     self->format = format;
     self->last_id = start - 1;
-    self->storage = storage;
+    self->storage = storage_ctor(format->destroy);
+    if (self->storage == NULL) {
+        my_free(self);
+        return (NULL);
+    }
     return (self);
 }
 
