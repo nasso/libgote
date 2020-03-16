@@ -12,7 +12,7 @@ type: lib
 namespace: gote
 
 dependencies:
-  - libmy=feat-rc
+  - libmy=master
 
 allowed: write malloc free calloc memmove memcpy memset read open close
 
