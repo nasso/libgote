@@ -36,4 +36,5 @@ jobs:
         working-directory: /tmp/Criterion/build
         run: sudo make install
       - name: Run tests
+        working-directory: ${{ github.workspace }}
         run: make tests_run
