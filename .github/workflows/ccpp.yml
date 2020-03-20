@@ -29,7 +29,7 @@ jobs:
         run: git clone --recursive https://github.com/Snaipe/Criterion.git --branch=master --depth=1
       - name: Build Criterion
         working-directory: /tmp/Criterion
-        run: mkdir build && cd Criterion/build && cmake .. && cmake --build .
+        run: mkdir build && cd build && cmake .. && cmake --build .
       - name: Install Criterion
         working-directory: /tmp/Criterion/build
         run: make install
