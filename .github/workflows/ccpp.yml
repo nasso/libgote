@@ -14,6 +14,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
+      - name: Print GCC version
+        run: gcc --version
       - name: Build project
         run: make
       
@@ -32,6 +34,6 @@ jobs:
         run: mkdir build && cd build && cmake .. && cmake --build .
       - name: Install Criterion
         working-directory: /tmp/Criterion/build
-        run: make install
+        run: sudo make install
       - name: Run tests
         run: make tests_run
