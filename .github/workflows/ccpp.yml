@@ -11,30 +11,47 @@ jobs:
 
     name: Build
     runs-on: [ubuntu-latest]
-    
+
     steps:
       - uses: actions/checkout@v2
-      - name: Print GCC version
-        run: gcc --version
+
       - name: Build project
+        env:
+          CC: gcc-8
         run: make
-      
+
   test:
-    
+
     name: Test
     needs: [build]
     runs-on: [ubuntu-latest]
-    
+
     steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v1
+        id: cache
+        env:
+          cache-name: cache-criterion
+        with:
+          path: ${{ runner.temp }}/Criterion
+          key: ${{ runner.os }}-test-${{ env.cache-name }}
+
       - name: Clone Criterion
-        working-directory: /tmp
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: ${{ runner.temp }}
         run: git clone --recursive https://github.com/Snaipe/Criterion.git --branch=master --depth=1
+
       - name: Build Criterion
-        working-directory: /tmp/Criterion
+        if: steps.cache.outputs.cache-hit != 'true'
+        working-directory: ${{ runner.temp }}/Criterion
         run: mkdir build && cd build && cmake .. && cmake --build .
+
       - name: Install Criterion
-        working-directory: /tmp/Criterion/build
+        working-directory: ${{ runner.temp }}/Criterion/build
         run: sudo make install
+
       - name: Run tests
-        working-directory: ${{ github.workspace }}
+        env:
+          CC: gcc-8
         run: make tests_run
