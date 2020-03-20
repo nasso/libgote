@@ -47,11 +47,10 @@ jobs:
         working-directory: ${{ runner.temp }}/Criterion
         run: mkdir build && cd build && cmake .. && cmake --build .
 
-      - name: Install Criterion
-        working-directory: ${{ runner.temp }}/Criterion/build
-        run: sudo make install
-
       - name: Run tests
         env:
           CC: gcc-8
+          LD_LIBRARY_PATH: ${{ runner.temp }}/Criterion/build:${{ env.LD_LIBRARY_PATH }}
+          LIBRARY_PATH: ${{ runner.temp }}/Criterion/build:${{ env.LIBRARY_PATH }}
+          CPATH: ${{ runner.temp }}/Criterion/include:${{ env.CPATH }}
         run: make tests_run
