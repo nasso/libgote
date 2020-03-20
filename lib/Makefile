@@ -5,7 +5,7 @@
 ## Makefile to build libraries
 ##
 
-REPO_PREFIX	=	git@github.com:nasso
+REPO_PREFIX	=	https://github.com/nasso
 
 makelib		=	$(MAKE) -sC $(1) $(2) NAME=$(abspath ./$(1).a);
 
@@ -34,7 +34,7 @@ $(NAME).a: $(NAME)
 
 $(NAME):
 	@printf '\r  \033[K\033[0;35m Fetching\033[0m `$@` ($(BRANCH))\n'
-	@git clone -q $(REPO_PREFIX)/$(NAME) --branch=$(BRANCH)
+	@git clone -q $(REPO_PREFIX)/$(NAME) --branch=$(BRANCH) --depth=1
 	@rm -rf $(NAME)/.git
 
 clean:
