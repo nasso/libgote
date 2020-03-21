@@ -13,4 +13,4 @@ See the [API documentation](https://nasso.io/libgote/doc/) and the [book](https:
 - Reference-counted asset loading
 - Consistent object-oriented API
 - Written in pure C that compiles with gcc >= 7 (gcc-8 without warnings) and clang >= 6
-- Comes with my [`libmy`](https://github.com/nasso/libmy). Is this even a feature?
+- Uses my [`libmy`](https://github.com/nasso/libmy)! Is this even a feature?
