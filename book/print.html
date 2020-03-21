@@ -233,6 +233,9 @@ active.</li>
 <li><strong>destroy</strong> - called when the state is destroyed, use it to free the <code>self</code>
 field.</li>
 </ul>
+<p>The <code>libgote</code> will safely ignore any callback set to <code>NULL</code>. This is why <strong>you
+should use <code>calloc</code></strong> to allocate the <code>gt_state_t</code> structure (<code>calloc</code> ensures
+all the allocated bytes are set to <code>NULL</code> or <code>0</code>).</p>
 <p>The <code>self</code> field allows you to store arbitrary data associated with your state.
 Its value is passed as an argument to all the callbacks. In most cases, you will
 use it to keep a reference to data you want to clean-up when the state is
