@@ -148,6 +148,111 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#state" id="state">State</a></h1>
+<h2><a class="header" href="#basics" id="basics">Basics</a></h2>
+<p>As described in <a href="https://gamedevelopment.tutsplus.com/articles/how-to-build-a-jrpg-a-primer-for-game-developers--gamedev-6676#state">this article</a>, a state (or game-state) represents a
+&quot;mode&quot; our game is in. For instance, we could separate an RPG in different
+game states:</p>
+<ul>
+<li>A &quot;local map&quot; state where the player can move around a terrain</li>
+<li>A &quot;world map&quot; state where a zoomed-out map of the world is displayed</li>
+<li>A &quot;combat&quot; state for fights!</li>
+<li>A &quot;pause menu&quot; state displaying the pause menu of the game</li>
+<li>...</li>
+</ul>
+<p><img src="jrpg-states-and-transistions.png" alt="Different game states and the transitions between them" /></p>
+<p>Essentially, every state has its own <code>start</code>, <code>stop</code> and <code>update</code> functions.</p>
+<h3><a class="header" href="#usage" id="usage">Usage</a></h3>
+<p>To create a state with the <code>libgote</code>, <strong>use <code>calloc</code></strong> to allocate a
+<code>gt_state_t</code> structure and set the callback functions you care about:</p>
+<pre><code class="language-c">gt_state_t *create_combat_state(void)
+{
+  gt_state_t *state = my_calloc(1, sizeof(gt_state_t));
+
+  state-&gt;update = &amp;combat_state_update;
+  return (state);
+}
+</code></pre>
+<p>Of course, <code>update</code> isn't the only callback available to game states. Here is
+a list of the most commonly used:</p>
+<ul>
+<li><strong>on_start</strong> - called when the state starts.</li>
+<li><strong>on_stop</strong> - called when the state stops.</li>
+<li><strong>update</strong> - called on every iteration of the game loop while the state is
+active.</li>
+<li><strong>destroy</strong> - called when the state is destroyed, use it to free the <code>self</code>
+field.</li>
+</ul>
+<p>The <code>self</code> field allows you to store arbitrary data associated with your state.
+Its value is passed as an argument to all the callbacks. In most cases, you will
+use it to keep a reference to data you want to clean-up when the state is
+stopped:</p>
+<pre><code class="language-c">/* Structure holding the data associated with the state */
+struct combat_state {
+  player_t *player;
+};
+
+/* Create the player when the state starts */
+static void combat_state_on_start(void *ptr, gt_state_data_t *data)
+{
+  struct combat_state *self = ptr;
+
+  self-&gt;player = player_create(data-&gt;world);
+}
+
+/* Remove the player when the state stops */
+static void combat_state_on_stop(void *ptr, gt_state_data_t *data)
+{
+  struct combat_state *self = ptr;
+
+  player_remove(self-&gt;player, data-&gt;world);
+}
+
+/* Create the state, its data structure, and set the callbacks */
+gt_state_t *create_combat_state(void)
+{
+  gt_state_t *state = my_calloc(1, sizeof(gt_state_t));
+
+  state-&gt;self = my_calloc(1, sizeof(struct combat_state));
+  state-&gt;destroy = &amp;my_free;
+  state-&gt;on_start = &amp;combat_state_on_start;
+  state-&gt;on_stop = &amp;combat_state_on_stop;
+  return (state);
+}
+</code></pre>
+<p><strong>Make sure not to forget to set <code>state-&gt;destroy</code> to an appropriate freeing
+function! If you don't do it, memory <em>WILL</em> leak!</strong></p>
+<h2><a class="header" href="#state-machine" id="state-machine">State machine</a></h2>
+<p>Game states are usually managed by something called a <strong>state machine</strong>. It is
+the one responsible for calling the right function at every iteration of the
+game loop. Only one state can be active at a time!</p>
+<p><img src="jrpg-state-machine.gif" alt="The state machine calls the update function of the currently active state" /></p>
+<p>The state machine is often implemented as a <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack</a>, where states can be
+pushed and popped. The state at the top of the stack is the <strong>active state</strong>.</p>
+<p><img src="jrpg-state-stack.gif" alt="A game state beind pushed and then popped from the state machine" /></p>
+<h2><a class="header" href="#transitions" id="transitions">Transitions</a></h2>
+<p>A change in the state machine's stack is called a <strong>state transition</strong>. There
+are 4 different kinds of transitions in the <code>libgote</code>:</p>
+<ul>
+<li><strong>Push transitions</strong> - a state is pushed on top of the stack: it becomes the
+active state.</li>
+<li><strong>Pop transitions</strong> - the state on top of the stack is removed (the state
+below it, if any, becomes active).</li>
+<li><strong>Switch transitions</strong> - the state on top of the stack is replaced with
+another state.</li>
+<li><strong>Quit transitions</strong> - all the states are removed from the stack, killing the
+the state machine.</li>
+</ul>
+<p>As soon as the state stack becomes empty, the state machine is killed and the
+game is effectively terminated.</p>
+<h2><a class="header" href="#additionnal-callbacks" id="additionnal-callbacks">Additionnal callbacks</a></h2>
+<p>In the <code>libgote</code>, states have actually 3 extra callbacks I didn't mention yet.
+You might need them in some special cases:</p>
+<ul>
+<li><strong>on_pause</strong> - called when a state is pushed on top of the current one.</li>
+<li><strong>on_resume</strong> - called when the state above gets popped.</li>
+<li><strong>shadow_update</strong> - same as <code>update</code>, but is called on ALL the states in the
+stack.</li>
+</ul>
 
                     </main>
 
