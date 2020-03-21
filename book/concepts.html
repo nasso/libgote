@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>libgote</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>Concepts - libgote</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -83,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="concepts.html"><strong aria-hidden="true">2.</strong> Concepts</a></li><li><ol class="section"><li class="expanded "><a href="concepts/state.html"><strong aria-hidden="true">2.1.</strong> State</a></li><li class="expanded "><a href="concepts/entity.html"><strong aria-hidden="true">2.2.</strong> Entity</a></li><li class="expanded "><a href="concepts/component.html"><strong aria-hidden="true">2.3.</strong> Component</a></li><li class="expanded "><a href="concepts/system.html"><strong aria-hidden="true">2.4.</strong> System</a></li><li class="expanded "><a href="concepts/dispatcher.html"><strong aria-hidden="true">2.5.</strong> Dispatcher</a></li><li class="expanded "><a href="concepts/resource.html"><strong aria-hidden="true">2.6.</strong> Resource</a></li><li class="expanded "><a href="concepts/world.html"><strong aria-hidden="true">2.7.</strong> World</a></li><li class="expanded "><a href="concepts/storage.html"><strong aria-hidden="true">2.8.</strong> Storage</a></li><li class="expanded "><a href="concepts/event_channel.html"><strong aria-hidden="true">2.9.</strong> Event channel</a></li><li class="expanded "><a href="concepts/asset_format.html"><strong aria-hidden="true">2.10.</strong> Asset format</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="concepts.html" class="active"><strong aria-hidden="true">2.</strong> Concepts</a></li><li><ol class="section"><li class="expanded "><a href="concepts/state.html"><strong aria-hidden="true">2.1.</strong> State</a></li><li class="expanded "><a href="concepts/entity.html"><strong aria-hidden="true">2.2.</strong> Entity</a></li><li class="expanded "><a href="concepts/component.html"><strong aria-hidden="true">2.3.</strong> Component</a></li><li class="expanded "><a href="concepts/system.html"><strong aria-hidden="true">2.4.</strong> System</a></li><li class="expanded "><a href="concepts/dispatcher.html"><strong aria-hidden="true">2.5.</strong> Dispatcher</a></li><li class="expanded "><a href="concepts/resource.html"><strong aria-hidden="true">2.6.</strong> Resource</a></li><li class="expanded "><a href="concepts/world.html"><strong aria-hidden="true">2.7.</strong> World</a></li><li class="expanded "><a href="concepts/storage.html"><strong aria-hidden="true">2.8.</strong> Storage</a></li><li class="expanded "><a href="concepts/event_channel.html"><strong aria-hidden="true">2.9.</strong> Event channel</a></li><li class="expanded "><a href="concepts/asset_format.html"><strong aria-hidden="true">2.10.</strong> Asset format</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -149,38 +147,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<h2><a class="header" href="#presentation" id="presentation">Presentation</a></h2>
-<p>This book will teach you everything you need to know about building video games
-with the <code>libgote</code>. I'll try to add information about the various aspects of the
-library and how you can link them together to make a complete video game.</p>
-<p>Refer to the <a href="https://nasso.io/libgote/doc/">API documentation</a> for an in-depth detail of all the
-functions provided by the library.</p>
-<h2><a class="header" href="#building-from-source" id="building-from-source">Building from source</a></h2>
-<h3><a class="header" href="#cloning-the-repository" id="cloning-the-repository">Cloning the repository</a></h3>
-<h4><a class="header" href="#using-ssh" id="using-ssh">Using SSH</a></h4>
-<p>Make sure your SSH key is linked to your GitHub account.</p>
-<pre><code class="language-sh">git clone git@github.com:nasso/libgote.git
-</code></pre>
-<h4><a class="header" href="#using-https" id="using-https">Using HTTPS</a></h4>
-<pre><code class="language-sh">git clone https://github.com/nasso/libgote.git
-</code></pre>
-<h3><a class="header" href="#building-libgote" id="building-libgote">Building <code>libgote</code></a></h3>
-<p>Just navigate in the root directory of the repository and call make:</p>
-<pre><code class="language-sh">cd libgote
-make
-</code></pre>
-<p>If you want to build it with debug flag (<code>-g3</code>), add <code>DEBUG=1</code> to the <code>make</code>
-command:</p>
-<pre><code class="language-sh">make DEBUG=1
-</code></pre>
-<h2><a class="header" href="#generating-the-documentation" id="generating-the-documentation">Generating the documentation</a></h2>
-<p>The library documentation is generated using Doxygen. A online version is
-available [here][doc].</p>
-<p>First, make sure the <code>./target</code> directory exists at the root of the repository.
-It is automatically created when building the library, but you can also use
-<code>mkdir</code>.</p>
-<h1><a class="header" href="#concepts" id="concepts">Concepts</a></h1>
+                        <h1><a class="header" href="#concepts" id="concepts">Concepts</a></h1>
 <p>This chapter will give you an overview of the different concepts you need to be
 familiar with to use <code>libgote</code>.
 Some of those concepts aren't specific to <code>libgote</code> and you will easily find
@@ -198,23 +165,21 @@ game assets.</p>
 <li><a href="concepts/event_channel.html">Event channel</a></li>
 <li><a href="concepts/asset_format.html">Asset format</a></li>
 </ul>
-<h1><a class="header" href="#state" id="state">State</a></h1>
-<h1><a class="header" href="#entity" id="entity">Entity</a></h1>
-<h1><a class="header" href="#component" id="component">Component</a></h1>
-<h1><a class="header" href="#system" id="system">System</a></h1>
-<h1><a class="header" href="#dispatcher" id="dispatcher">Dispatcher</a></h1>
-<h1><a class="header" href="#resource" id="resource">Resource</a></h1>
-<h1><a class="header" href="#world" id="world">World</a></h1>
-<h1><a class="header" href="#storage" id="storage">Storage</a></h1>
-<h1><a class="header" href="#event-channel" id="event-channel">Event channel</a></h1>
-<h1><a class="header" href="#asset-format" id="asset-format">Asset format</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="concepts/state.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -224,7 +189,15 @@ game assets.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a rel="next" href="concepts/state.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
@@ -257,14 +230,6 @@ game assets.</p>
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>
