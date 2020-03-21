@@ -1,0 +1,4 @@
+<map id="gt_state_trans" name="gt_state_trans">
+<area shape="rect" id="node1" title="Type representing transitions between states in a state machine." alt="" coords="5,5,111,32"/>
+<area shape="rect" id="node2" href="$structgt__state.html" title="A game state." alt="" coords="23,95,93,121"/>
+</map>

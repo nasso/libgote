@@ -1,0 +1,4 @@
+<map id="gt_state_data" name="gt_state_data">
+<area shape="rect" id="node1" title="The data shared by all states of a state machine." alt="" coords="5,95,107,121"/>
+<area shape="rect" id="node2" href="$structgt__world.html" title="A container for resources." alt="" coords="21,5,91,32"/>
+</map>

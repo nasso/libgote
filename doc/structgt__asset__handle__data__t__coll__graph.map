@@ -1,0 +1,4 @@
+<map id="gt_asset_handle_data_t" name="gt_asset_handle_data_t">
+<area shape="rect" id="node1" title="Structure holding information about an asset handle." alt="" coords="5,95,165,121"/>
+<area shape="rect" id="node2" href="$structgt__format.html" title="A format defines how assets are to be loaded." alt="" coords="47,5,124,32"/>
+</map>
