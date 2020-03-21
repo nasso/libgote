@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Documentation
+
+# Controls when the action will run. Triggers the workflow on push on the book branch
+on:
+  push:
+    branches: [ book ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  book-update:
+
+    name: Update book
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: book
+
+    - uses: actions/checkout@v2
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Setup mdBook
+      uses: peaceiris/actions-mdbook@v1.1.8
+
+    - name: Build book
+      run: mdbook build
+
+    - name: Copy built book
+      run: cp -rT ./book ./gh-pages/book
+
+    - name: Check for changes
+      id: check-doc-changed
+      run: |
+        cd ./gh-pages
+        git add --all
+        git diff-index --cached --quiet HEAD -- || echo "::set-output name=has-changed::true"
+    - name: Commit changes
+      if: steps.check-doc-changed.outputs.has-changed == 'true'
+      run: |
+        cd ./gh-pages
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "docs: update book"
+    - name: Push changes to GitHub Pages
+      if: steps.check-doc-changed.outputs.has-changed == 'true'
+      uses: ad-m/github-push-action@v0.5.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        directory: gh-pages
+        branch: gh-pages
