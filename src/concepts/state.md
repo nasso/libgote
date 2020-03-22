@@ -57,19 +57,19 @@ struct combat_state {
 };
 
 /* Create the player when the state starts */
-static void combat_state_on_start(void *ptr, gt_state_data_t *data)
+static void combat_state_on_start(void *ptr, gt_world_t *world)
 {
   struct combat_state *self = ptr;
 
-  self->player = player_create(data->world);
+  self->player = player_create(world);
 }
 
 /* Remove the player when the state stops */
-static void combat_state_on_stop(void *ptr, gt_state_data_t *data)
+static void combat_state_on_stop(void *ptr, gt_world_t *world)
 {
   struct combat_state *self = ptr;
 
-  player_remove(self->player, data->world);
+  player_remove(self->player, world);
 }
 
 /* Create the state, its data structure, and set the callbacks */
