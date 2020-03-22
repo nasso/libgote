@@ -1,6 +1,5 @@
 <map id="gt_app" name="gt_app">
-<area shape="rect" id="node1" title="Structure holding all the data needed by a game or application." alt="" coords="42,184,103,211"/>
-<area shape="rect" id="node2" href="$structgt__world.html" title="A container for resources." alt="" coords="5,95,76,121"/>
-<area shape="rect" id="node3" href="$structgt__game__data.html" title="A general purpose data type for use in gt_state_data_t." alt="" coords="101,95,205,121"/>
-<area shape="rect" id="node4" href="$structgt__dispatcher.html" title="Helper object to run a list of gt_system_t on a gt_world_t." alt="" coords="103,5,203,32"/>
+<area shape="rect" id="node1" title="Structure holding all the data needed by a game or application." alt="" coords="79,95,141,121"/>
+<area shape="rect" id="node2" href="$structgt__dispatcher.html" title="Helper object to run a list of gt_system_t on a gt_world_t." alt="" coords="5,5,105,32"/>
+<area shape="rect" id="node3" href="$structgt__world.html" title="A container for resources." alt="" coords="129,5,200,32"/>
 </map>

@@ -83,39 +83,38 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;stdarg.h&gt;</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;gote/ecs.h&quot;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;gote/state.h&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;gote/game_data.h&quot;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structgt__app.html">   19</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structgt__app.html">gt_app</a> {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="structgt__world.html">gt_world_t</a> *world;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="machine_8h.html#ae4fe9986061717fe8e226827a5399dbd">gt_state_machine_t</a> *states;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="structgt__game__data.html">gt_game_data_t</a> *data;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    f64_t dt_ms;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    f64_t time_ms;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        u64_t trans_chan_sub;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    } priv;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <a class="code" href="app_8h.html#af019be6c32900d610942a593ce103743">gt_app_t</a>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<a class="code" href="structgt__app.html">gt_app_t</a> *<a class="code" href="app_8h.html#a9852a798ead731a201fa5758ab2f6b17">gt_app_create</a>(<a class="code" href="structgt__state.html">gt_state_t</a> *initial_state, usize_t system_count, ...);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<a class="code" href="structgt__app.html">gt_app_t</a> *<a class="code" href="app_8h.html#a3e23b59741af2962b986be5b3d78402f">gt_app_create_var</a>(<a class="code" href="structgt__state.html">gt_state_t</a> *initial_state, usize_t system_count,</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    va_list ap);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">void</span> <a class="code" href="app_8h.html#a96734718511ca0d5c3af5c144159971a">gt_app_destroy</a>(<a class="code" href="structgt__app.html">gt_app_t</a> *<span class="keyword">self</span>);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="app_8h.html#a11d0f41124648d7788c3385d4687dcb9">gt_app_run</a>(<a class="code" href="structgt__app.html">gt_app_t</a> *<span class="keyword">self</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LIBGOTE_APP_H */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structgt__app.html">   18</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structgt__app.html">gt_app</a> {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="structgt__world.html">gt_world_t</a> *world;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="machine_8h.html#ae4fe9986061717fe8e226827a5399dbd">gt_state_machine_t</a> *states;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="structgt__dispatcher.html">gt_dispatcher_t</a> *dispatcher;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    f64_t dt_ms;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    f64_t time_ms;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        u64_t trans_chan_sub;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    } priv;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;} <a class="code" href="app_8h.html#af019be6c32900d610942a593ce103743">gt_app_t</a>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<a class="code" href="structgt__app.html">gt_app_t</a> *<a class="code" href="app_8h.html#a9852a798ead731a201fa5758ab2f6b17">gt_app_create</a>(<a class="code" href="structgt__state.html">gt_state_t</a> *initial_state, usize_t system_count, ...);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<a class="code" href="structgt__app.html">gt_app_t</a> *<a class="code" href="app_8h.html#a3e23b59741af2962b986be5b3d78402f">gt_app_create_var</a>(<a class="code" href="structgt__state.html">gt_state_t</a> *initial_state, usize_t system_count,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    va_list ap);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">void</span> <a class="code" href="app_8h.html#a96734718511ca0d5c3af5c144159971a">gt_app_destroy</a>(<a class="code" href="structgt__app.html">gt_app_t</a> *<span class="keyword">self</span>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="app_8h.html#a11d0f41124648d7788c3385d4687dcb9">gt_app_run</a>(<a class="code" href="structgt__app.html">gt_app_t</a> *<span class="keyword">self</span>);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* LIBGOTE_APP_H */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructgt__state_html"><div class="ttname"><a href="structgt__state.html">gt_state</a></div><div class="ttdoc">A game state.</div><div class="ttdef"><b>Definition:</b> state.h:20</div></div>
 <div class="ttc" id="amachine_8h_html_ae4fe9986061717fe8e226827a5399dbd"><div class="ttname"><a href="machine_8h.html#ae4fe9986061717fe8e226827a5399dbd">gt_state_machine_t</a></div><div class="ttdeci">struct gt_state_machine gt_state_machine_t</div><div class="ttdoc">A simple state machine.</div><div class="ttdef"><b>Definition:</b> machine.h:16</div></div>
 <div class="ttc" id="aapp_8h_html_af019be6c32900d610942a593ce103743"><div class="ttname"><a href="app_8h.html#af019be6c32900d610942a593ce103743">gt_app_t</a></div><div class="ttdeci">struct gt_app gt_app_t</div><div class="ttdoc">Structure holding all the data needed by a game or application.</div></div>
-<div class="ttc" id="astructgt__app_html"><div class="ttname"><a href="structgt__app.html">gt_app</a></div><div class="ttdoc">Structure holding all the data needed by a game or application.</div><div class="ttdef"><b>Definition:</b> app.h:19</div></div>
+<div class="ttc" id="astructgt__app_html"><div class="ttname"><a href="structgt__app.html">gt_app</a></div><div class="ttdoc">Structure holding all the data needed by a game or application.</div><div class="ttdef"><b>Definition:</b> app.h:18</div></div>
 <div class="ttc" id="aapp_8h_html_a3e23b59741af2962b986be5b3d78402f"><div class="ttname"><a href="app_8h.html#a3e23b59741af2962b986be5b3d78402f">gt_app_create_var</a></div><div class="ttdeci">gt_app_t * gt_app_create_var(gt_state_t *initial_state, usize_t system_count, va_list ap)</div><div class="ttdoc">Create an application with the given systems (as a va_list).</div></div>
 <div class="ttc" id="aapp_8h_html_a9852a798ead731a201fa5758ab2f6b17"><div class="ttname"><a href="app_8h.html#a9852a798ead731a201fa5758ab2f6b17">gt_app_create</a></div><div class="ttdeci">gt_app_t * gt_app_create(gt_state_t *initial_state, usize_t system_count,...)</div><div class="ttdoc">Create an application with the given systems.</div></div>
 <div class="ttc" id="aapp_8h_html_a11d0f41124648d7788c3385d4687dcb9"><div class="ttname"><a href="app_8h.html#a11d0f41124648d7788c3385d4687dcb9">gt_app_run</a></div><div class="ttdeci">bool gt_app_run(gt_app_t *self)</div><div class="ttdoc">Run an application.</div></div>
 <div class="ttc" id="aapp_8h_html_a96734718511ca0d5c3af5c144159971a"><div class="ttname"><a href="app_8h.html#a96734718511ca0d5c3af5c144159971a">gt_app_destroy</a></div><div class="ttdeci">void gt_app_destroy(gt_app_t *self)</div><div class="ttdoc">Destroy a gt_app_t.</div></div>
-<div class="ttc" id="astructgt__game__data_html"><div class="ttname"><a href="structgt__game__data.html">gt_game_data</a></div><div class="ttdoc">A general purpose data type for use in gt_state_data_t.</div><div class="ttdef"><b>Definition:</b> game_data.h:17</div></div>
+<div class="ttc" id="astructgt__dispatcher_html"><div class="ttname"><a href="structgt__dispatcher.html">gt_dispatcher</a></div><div class="ttdoc">Helper object to run a list of gt_system_t on a gt_world_t.</div><div class="ttdef"><b>Definition:</b> dispatcher.h:19</div></div>
 <div class="ttc" id="astructgt__world_html"><div class="ttname"><a href="structgt__world.html">gt_world</a></div><div class="ttdoc">A container for resources.</div><div class="ttdef"><b>Definition:</b> world.h:21</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
