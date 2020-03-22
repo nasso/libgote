@@ -12,10 +12,11 @@
 #include "gote/gote.h"
 
 #define MAKE_SHOUTER(name) \
-    static void shout_##name(void *self, gt_state_data_t *data) \
-    { \
-        my_printf(#name " %d %d;", *((i32_t*) self), *((i32_t*) data->data)); \
-    }
+\
+static void shout_##name(void *self, gt_world_t *world) \
+{ \
+    my_printf(#name " %d %zu;", *((i32_t*) self), (usize_t) world); \
+}
 
 MAKE_SHOUTER(start)
 MAKE_SHOUTER(stop)
@@ -23,9 +24,9 @@ MAKE_SHOUTER(pause)
 MAKE_SHOUTER(resume)
 MAKE_SHOUTER(shadow_update)
 
-static gt_state_trans_t shout_update(void *self, gt_state_data_t *data)
+static gt_state_trans_t shout_update(void *self, gt_world_t *world)
 {
-    my_printf("update %d %d;", *((i32_t*) self), *((i32_t*) data->data));
+    my_printf("update %d %zu;", *((i32_t*) self), (usize_t) world);
     return (gt_state_trans_none());
 }
 
@@ -54,18 +55,16 @@ TestSuite(state, .timeout = 1.0, .init = cr_redirect_stdout);
 Test(state, simple_lifecyle)
 {
     i32_t val = 4;
-    i32_t val2 = 2;
+    gt_world_t *world = (gt_world_t*) 2;
     gt_state_t *state = state_that_shouts_very_loud(&val);
-    gt_state_data_t *data = gt_state_data_create(NULL, &val2);
 
-    gt_state_on_start(state, data);
-    cr_assert_eq(gt_state_update(state, data).type, GT_STATE_TRANS_NONE);
-    gt_state_shadow_update(state, data);
-    gt_state_on_pause(state, data);
-    gt_state_shadow_update(state, data);
-    gt_state_on_resume(state, data);
-    gt_state_on_stop(state, data);
-    gt_state_data_destroy(data);
+    gt_state_on_start(state, world);
+    cr_assert_eq(gt_state_update(state, world).type, GT_STATE_TRANS_NONE);
+    gt_state_shadow_update(state, world);
+    gt_state_on_pause(state, world);
+    gt_state_shadow_update(state, world);
+    gt_state_on_resume(state, world);
+    gt_state_on_stop(state, world);
     gt_state_destroy(state);
     my_putchar('\n');
     cr_assert_stdout_eq_str(

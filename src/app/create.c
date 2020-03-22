@@ -46,8 +46,8 @@ gt_app_t *gt_app_create_var(gt_state_t *initial_state, usize_t system_count,
         return (NULL);
     app->world = gt_world_create();
     app->states = gt_state_machine_create(initial_state);
-    app->data = gt_game_data_with_var(system_count, ap);
-    if (app->world == NULL || app->states == NULL || app->data == NULL ||
+    app->dispatcher = gt_dispatcher_create_v(system_count, ap);
+    if (app->world == NULL || app->states == NULL || app->dispatcher == NULL ||
         setup_world(app)) {
         gt_app_destroy(app);
         return (NULL);

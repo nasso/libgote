@@ -8,8 +8,8 @@
 #include "my/my.h"
 #include "gote/state/state.h"
 
-void gt_state_on_resume(gt_state_t *state, gt_state_data_t *data)
+void gt_state_on_resume(gt_state_t *state, gt_world_t *world)
 {
     if (state->on_resume)
-        state->on_resume(state->self, data);
+        state->on_resume(state->self, world);
 }

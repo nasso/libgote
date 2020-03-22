@@ -13,7 +13,7 @@ void gt_app_destroy(gt_app_t *self)
 {
     if (self == NULL)
         return;
-    gt_game_data_destroy(self->data);
+    gt_dispatcher_destroy(self->dispatcher);
     gt_state_machine_destroy(self->states);
     gt_world_destroy(self->world);
     my_free(self);

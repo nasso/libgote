@@ -16,7 +16,7 @@
 typedef struct gt_state_machine gt_state_machine_t;
 
 #include "my/my.h"
-#include "gote/state/data.h"
+#include "gote/ecs.h"
 #include "gote/state/state.h"
 #include "gote/state/trans.h"
 
@@ -38,22 +38,22 @@ bool gt_state_machine_is_running(gt_state_machine_t *self);
 
 //! \brief Start the state machine.
 //! \param self The state machine.
-//! \param state_data The state data structure.
+//! \param world The world.
 //! \return \c true if an error occured, \c false otherwise.
-bool gt_state_machine_start(gt_state_machine_t *self, gt_state_data_t *data);
+bool gt_state_machine_start(gt_state_machine_t *self, gt_world_t *world);
 
 //! \brief Update the state machine.
 //! \param self The state machine.
-//! \param state_data The state data structure.
+//! \param world The world.
 //! \return \c true if an error occured, \c false otherwise.
-bool gt_state_machine_update(gt_state_machine_t *self, gt_state_data_t *data);
+bool gt_state_machine_update(gt_state_machine_t *self, gt_world_t *world);
 
 //! \brief Perform a state transition.
 //! \param self The state machine.
 //! \param trans The transition to perform.
-//! \param state_data The state data structure.
+//! \param world The world.
 //! \return \c true if an error occured, \c false otherwise.
 bool gt_state_machine_trans(gt_state_machine_t *self,
-    const gt_state_trans_t *trans, gt_state_data_t *data);
+    const gt_state_trans_t *trans, gt_world_t *world);
 
 #endif /* LIBGOTE_STATE_MACHINE_H */

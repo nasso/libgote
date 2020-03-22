@@ -58,18 +58,14 @@ src:
   - ./src/state/state/on_stop.c
   - ./src/state/state/shadow_update.c
   - ./src/state/state/update.c
-  - ./src/state/data.c
   - ./src/state/trans.c
-  - ./src/game_data.c
 
 tests_src:
   - ./tests/ecs/dispatcher.c
   - ./tests/ecs/storage.c
   - ./tests/ecs/world.c
   - ./tests/event/channel.c
-  - ./tests/state/data.c
   - ./tests/state/machine.c
   - ./tests/state/state.c
   - ./tests/state/trans.c
   - ./tests/app.c
-  - ./tests/game_data.c

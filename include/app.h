@@ -13,13 +13,12 @@
 #include <stdarg.h>
 #include "gote/ecs.h"
 #include "gote/state.h"
-#include "gote/game_data.h"
 
 //! \brief Structure holding all the data needed by a game or application.
 typedef struct gt_app {
     gt_world_t *world;
     gt_state_machine_t *states;
-    gt_game_data_t *data;
+    gt_dispatcher_t *dispatcher;
     f64_t dt_ms;
     f64_t time_ms;
     struct {
