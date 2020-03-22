@@ -7,11 +7,11 @@
 
 #include "my/my.h"
 #include "gote/event/channel.h"
-#include "gote/event/channel_priv.h"
+#include "priv.h"
 
 void gt_event_channel_unsub(gt_event_channel_t *self, u64_t handle)
 {
     if (handle == 0 || handle > self->sub_count)
         return;
-    self->subs[handle - 1] = (opt_usize_t) NONE;
+    self->subs[handle - 1] = NONE(usize);
 }

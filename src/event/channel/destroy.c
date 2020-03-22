@@ -7,7 +7,7 @@
 
 #include "my/my.h"
 #include "gote/event/channel.h"
-#include "gote/event/channel_priv.h"
+#include "priv.h"
 
 void gt_event_channel_destroy(gt_event_channel_t *self)
 {

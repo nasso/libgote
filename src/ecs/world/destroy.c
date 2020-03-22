@@ -10,7 +10,7 @@
 #include "gote/ecs/world.h"
 #include "gote/ecs/world_priv.h"
 
-static int destroy_resource_callback(void *user_data, hash_map_pair_t *pair)
+static OPT(i32) destroy_resource_callback(void *user_data, hash_map_pair_t *pair)
 {
     gt_resource_t *res = pair->value;
 
@@ -18,7 +18,7 @@ static int destroy_resource_callback(void *user_data, hash_map_pair_t *pair)
     if (res && res->destroyer)
         res->destroyer(res->self);
     my_free(res);
-    return (0);
+    return (NONE(i32));
 }
 
 void gt_world_destroy(gt_world_t *self)

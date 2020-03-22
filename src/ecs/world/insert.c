@@ -13,7 +13,8 @@
 bool gt_world_insert(gt_world_t *self, const char *key, void *data,
     void (*destroyer)(void*))
 {
-    gt_resource_t *res = hash_map_get(self->resources, key);
+    OPT(ptr) opt_res = hash_map_get(self->resources, key);
+    gt_resource_t *res = opt_res.is_some ? opt_res.v : NULL;
 
     if (res == NULL) {
         res = my_calloc(1, sizeof(gt_resource_t));

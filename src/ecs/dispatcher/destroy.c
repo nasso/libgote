@@ -10,13 +10,13 @@
 #include "gote/ecs/system.h"
 #include "gote/ecs/dispatcher.h"
 
-static int destroy_system_callback(void *user_data, void *ptr)
+static OPT(i32) destroy_system_callback(void *user_data, void *ptr)
 {
     gt_system_t *system = ptr;
 
     (void)(user_data);
     gt_system_destroy(system);
-    return (0);
+    return (NONE(i32));
 }
 
 void gt_dispatcher_destroy(gt_dispatcher_t *self)

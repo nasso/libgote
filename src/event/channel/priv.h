@@ -16,7 +16,7 @@ struct gt_event_channel {
     void *buffer;
     usize_t cursor;
     usize_t buf_size;
-    opt_usize_t *subs;
+    OPT(usize) *subs;
     usize_t sub_count;
 };
 

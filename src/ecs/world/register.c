@@ -23,7 +23,7 @@ bool gt_world_register_component(gt_world_t *self,
 {
     gt_storage_t *storage = NULL;
 
-    if (list_find(self->component_classes, (void*) class))
+    if (list_find(self->component_classes, (void*) class).is_some)
         return (false);
     else if (list_push_back(self->component_classes, (void*) class))
         return (true);

@@ -8,11 +8,11 @@
 #include "my/my.h"
 #include "my/io.h"
 #include "gote/event/channel.h"
-#include "gote/event/channel_priv.h"
+#include "priv.h"
 
 bool gt_event_channel_poll(gt_event_channel_t *self, u64_t handle, void *event)
 {
-    opt_usize_t sub = NONE;
+    OPT(usize) sub = NONE(usize);
     usize_t offset = 0;
 
     if (handle == 0 || handle > self->sub_count)

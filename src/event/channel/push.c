@@ -7,7 +7,7 @@
 
 #include "my/my.h"
 #include "gote/event/channel.h"
-#include "gote/event/channel_priv.h"
+#include "priv.h"
 
 //! \brief Check if the slot at the given index is overwritable.
 //!
@@ -16,7 +16,7 @@
 //! \return \c true if an error occured, \c false otherwise
 static bool is_index_free(const gt_event_channel_t *self, usize_t id)
 {
-    opt_usize_t sub = NONE;
+    OPT(usize) sub = NONE(usize);
 
     for (usize_t i = 0; i < self->sub_count; i++) {
         sub = self->subs[i];

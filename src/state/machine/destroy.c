@@ -9,19 +9,14 @@
 #include "my/collections/list.h"
 #include "gote/state/state.h"
 #include "gote/state/machine.h"
-#include "gote/state/machine_priv.h"
-
-static int destroy_stack_callback(void *user_data, void *element)
-{
-    (void)(user_data);
-    gt_state_destroy(element);
-    return (0);
-}
+#include "priv.h"
 
 void gt_state_machine_destroy(gt_state_machine_t *self)
 {
     if (self == NULL)
         return;
-    list_destroy_with(self->stack, &destroy_stack_callback, NULL);
+    LIST_FOR_EACH(self->stack, iter)
+        gt_state_destroy(iter.v);
+    list_destroy(self->stack);
     my_free(self);
 }

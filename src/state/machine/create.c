@@ -9,7 +9,7 @@
 #include "my/collections/list.h"
 #include "gote/state/state.h"
 #include "gote/state/machine.h"
-#include "gote/state/machine_priv.h"
+#include "priv.h"
 
 gt_state_machine_t *gt_state_machine_create(gt_state_t *initial_state)
 {

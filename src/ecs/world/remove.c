@@ -12,7 +12,8 @@
 
 void gt_world_remove(gt_world_t *self, const char *key)
 {
-    gt_resource_t *res = hash_map_remove(self->resources, key);
+    OPT(ptr) opt_res = hash_map_remove(self->resources, key);
+    gt_resource_t *res = opt_res.is_some ? opt_res.v : NULL;
 
     if (res != NULL && res->destroyer)
         res->destroyer(res->self);

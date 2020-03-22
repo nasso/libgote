@@ -7,7 +7,7 @@
 
 #include "my/my.h"
 #include "gote/event/channel.h"
-#include "gote/event/channel_priv.h"
+#include "priv.h"
 
 static const usize_t INITIAL_SIZE = 4;
 

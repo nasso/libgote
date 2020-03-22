@@ -10,15 +10,15 @@
 #include "gote/state/state.h"
 #include "gote/state/trans.h"
 #include "gote/state/machine.h"
-#include "gote/state/machine_priv.h"
+#include "priv.h"
 
 static bool trans_pop(gt_state_machine_t *self, gt_state_data_t *data)
 {
     gt_state_t *state = self->stack->head->val;
 
     gt_state_on_stop(state, data);
-    gt_state_destroy(list_pop_front(self->stack));
-    state = list_get(self->stack, 0);
+    gt_state_destroy(list_pop_front(self->stack).v);
+    state = list_get(self->stack, 0).v;
     self->running = state != NULL;
     if (state)
         gt_state_on_resume(state, data);
@@ -53,13 +53,13 @@ static bool trans_switch(gt_state_machine_t *self, gt_state_t *state,
 
 static bool trans_stop(gt_state_machine_t *self, gt_state_data_t *data)
 {
-    gt_state_t *state = list_pop_front(self->stack);
+    gt_state_t *state = list_pop_front(self->stack).v;
 
     self->running = false;
     while (state) {
         gt_state_on_stop(state, data);
         gt_state_destroy(state);
-        state = list_pop_front(self->stack);
+        state = list_pop_front(self->stack).v;
     }
     return (false);
 }
