@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Event channel - libgote</title>
+        <title>World and Resource - libgote</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../concepts.html"><strong aria-hidden="true">2.</strong> Concepts</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/state.html"><strong aria-hidden="true">2.1.</strong> State</a></li><li class="expanded "><a href="../concepts/world-resource.html"><strong aria-hidden="true">2.2.</strong> World and Resource</a></li><li class="expanded "><a href="../concepts/entity-component.html"><strong aria-hidden="true">2.3.</strong> Entity and Component</a></li><li class="expanded "><a href="../concepts/system.html"><strong aria-hidden="true">2.4.</strong> System</a></li><li class="expanded "><a href="../concepts/dispatcher.html"><strong aria-hidden="true">2.5.</strong> Dispatcher</a></li><li class="expanded "><a href="../concepts/event_channel.html" class="active"><strong aria-hidden="true">2.6.</strong> Event channel</a></li><li class="expanded "><a href="../concepts/asset_format.html"><strong aria-hidden="true">2.7.</strong> Asset format</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../concepts.html"><strong aria-hidden="true">2.</strong> Concepts</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/state.html"><strong aria-hidden="true">2.1.</strong> State</a></li><li class="expanded "><a href="../concepts/world-resource.html" class="active"><strong aria-hidden="true">2.2.</strong> World and Resource</a></li><li class="expanded "><a href="../concepts/entity-component.html"><strong aria-hidden="true">2.3.</strong> Entity and Component</a></li><li class="expanded "><a href="../concepts/system.html"><strong aria-hidden="true">2.4.</strong> System</a></li><li class="expanded "><a href="../concepts/dispatcher.html"><strong aria-hidden="true">2.5.</strong> Dispatcher</a></li><li class="expanded "><a href="../concepts/event_channel.html"><strong aria-hidden="true">2.6.</strong> Event channel</a></li><li class="expanded "><a href="../concepts/asset_format.html"><strong aria-hidden="true">2.7.</strong> Asset format</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -147,20 +147,68 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#event-channel" id="event-channel">Event channel</a></h1>
+                        <h1><a class="header" href="#world-and-resource" id="world-and-resource">World and Resource</a></h1>
+<h2><a class="header" href="#world" id="world">World</a></h2>
+<p>All the data global to your game is stored in what is called a &quot;World&quot;. That
+includes, for instance, all the entities of your game. Entities are covered in
+<a href="entity.html">their own chapter</a>.</p>
+<p>The world really is just a <a href="https://en.wikipedia.org/wiki/Hash_table">hash table</a> mapping keys (character
+strings) to <em>resources</em>.</p>
+<h2><a class="header" href="#resource" id="resource">Resource</a></h2>
+<p>What is a resource? Anything you want! The only requirement is that it must be
+a pointer. Other than that, you can have anything you want except for function
+pointers, because of the C language specification forbidding it. If you really
+need to store a function pointer in your World, wrap them in a heap-allocated
+structure and it will be fine!</p>
+<h2><a class="header" href="#usage-in-the-libgote" id="usage-in-the-libgote">Usage in the <code>libgote</code></a></h2>
+<h3><a class="header" href="#creating-a-new-world" id="creating-a-new-world">Creating a new world</a></h3>
+<p>You will rarely ever need to create or destroy a world directly (<code>libgote</code> does
+it for you when you create a <a href="https://nasso.io/libgote/doc/app_8h.html"><code>gt_app_t</code></a>). Though, here's how you
+would do it:</p>
+<pre><code class="language-c">// create a world this way:
+gt_world_t *world = gt_world_create();
+
+// destroy it when you're done!
+gt_world_destroy(world);
+</code></pre>
+<h3><a class="header" href="#resource-insertion" id="resource-insertion">Resource insertion</a></h3>
+<p>When inserting a resource in the world, you can optionally specify a destructor
+to be called when the resource is removed or the world destroyed:</p>
+<pre><code class="language-c">list_t *cool_stuff = list_from(3, &quot;furries&quot;, &quot;undertale&quot;, &quot;you&quot;);
+
+// the destroyer must be explicitly cast because C cannot implicitly cast
+// function pointers, even when they are compatible.
+gt_world_insert(world, &quot;cool_stuff&quot;, data, (void (*)(void*)) &amp;list_destroy);
+</code></pre>
+<p>For resources which do not need to be destroyed (i.e. static value), just set
+the destroyer to <code>NULL</code>:</p>
+<pre><code class="language-c">gt_world_insert(world, &quot;some_string&quot;, &quot;Hey! This is a resource!&quot;, NULL);
+</code></pre>
+<h3><a class="header" href="#resource-retrieval" id="resource-retrieval">Resource retrieval</a></h3>
+<p>Getting a resource from the world is straightforward:</p>
+<pre><code class="language-c">const char *my_resource = gt_world_get(world, &quot;some_string&quot;);
+
+my_printf(&quot;%s&quot;, my_resource); // &quot;Hey! This is a resource!&quot;
+</code></pre>
+<h3><a class="header" href="#resource-removal" id="resource-removal">Resource removal</a></h3>
+<p>Removing a resource from the world is, also, straightforward:</p>
+<pre><code class="language-c">gt_world_remove(world, &quot;some_string&quot;);
+</code></pre>
+<p>Note that <code>gt_world_remove</code> does <em>NOT</em> return anything! The resource is
+destroyed as soon as you remove it from the world.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../concepts/dispatcher.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../concepts/state.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../concepts/asset_format.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../concepts/entity-component.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -172,13 +220,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../concepts/dispatcher.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../concepts/state.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="../concepts/asset_format.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../concepts/entity-component.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

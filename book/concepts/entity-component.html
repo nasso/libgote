@@ -3,9 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>libgote</title>
-        
-        <meta name="robots" content="noindex" />
+        <title>Entity and Component - libgote</title>
         
 
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -13,21 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
         
@@ -37,7 +35,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
         </script>
 
@@ -83,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div id="sidebar-scrollbox" class="sidebar-scrollbox">
-                <ol class="chapter"><li class="expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="concepts.html"><strong aria-hidden="true">2.</strong> Concepts</a></li><li><ol class="section"><li class="expanded "><a href="concepts/state.html"><strong aria-hidden="true">2.1.</strong> State</a></li><li class="expanded "><a href="concepts/world-resource.html"><strong aria-hidden="true">2.2.</strong> World and Resource</a></li><li class="expanded "><a href="concepts/entity-component.html"><strong aria-hidden="true">2.3.</strong> Entity and Component</a></li><li class="expanded "><a href="concepts/system.html"><strong aria-hidden="true">2.4.</strong> System</a></li><li class="expanded "><a href="concepts/dispatcher.html"><strong aria-hidden="true">2.5.</strong> Dispatcher</a></li><li class="expanded "><a href="concepts/event_channel.html"><strong aria-hidden="true">2.6.</strong> Event channel</a></li><li class="expanded "><a href="concepts/asset_format.html"><strong aria-hidden="true">2.7.</strong> Asset format</a></li></ol></li></ol>
+                <ol class="chapter"><li class="expanded "><a href="../introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../concepts.html"><strong aria-hidden="true">2.</strong> Concepts</a></li><li><ol class="section"><li class="expanded "><a href="../concepts/state.html"><strong aria-hidden="true">2.1.</strong> State</a></li><li class="expanded "><a href="../concepts/world-resource.html"><strong aria-hidden="true">2.2.</strong> World and Resource</a></li><li class="expanded "><a href="../concepts/entity-component.html" class="active"><strong aria-hidden="true">2.3.</strong> Entity and Component</a></li><li class="expanded "><a href="../concepts/system.html"><strong aria-hidden="true">2.4.</strong> System</a></li><li class="expanded "><a href="../concepts/dispatcher.html"><strong aria-hidden="true">2.5.</strong> Dispatcher</a></li><li class="expanded "><a href="../concepts/event_channel.html"><strong aria-hidden="true">2.6.</strong> Event channel</a></li><li class="expanded "><a href="../concepts/asset_format.html"><strong aria-hidden="true">2.7.</strong> Asset format</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -118,7 +116,7 @@
                     <h1 class="menu-title">libgote</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
                         
@@ -149,211 +147,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#introduction" id="introduction">Introduction</a></h1>
-<h2><a class="header" href="#presentation" id="presentation">Presentation</a></h2>
-<p>This book will teach you everything you need to know about building video games
-with the <code>libgote</code>. I'll try to add information about the various aspects of the
-library and how you can link them together to make a complete video game.</p>
-<p>Refer to the <a href="https://nasso.io/libgote/doc/">API documentation</a> for an in-depth detail of all the
-functions provided by the library.</p>
-<h2><a class="header" href="#building-from-source" id="building-from-source">Building from source</a></h2>
-<h3><a class="header" href="#cloning-the-repository" id="cloning-the-repository">Cloning the repository</a></h3>
-<h4><a class="header" href="#using-ssh" id="using-ssh">Using SSH</a></h4>
-<p>Make sure your SSH key is linked to your GitHub account.</p>
-<pre><code class="language-sh">git clone git@github.com:nasso/libgote.git
-</code></pre>
-<h4><a class="header" href="#using-https" id="using-https">Using HTTPS</a></h4>
-<pre><code class="language-sh">git clone https://github.com/nasso/libgote.git
-</code></pre>
-<h3><a class="header" href="#building-libgote" id="building-libgote">Building <code>libgote</code></a></h3>
-<p>Just navigate in the root directory of the repository and call make:</p>
-<pre><code class="language-sh">cd libgote
-make
-</code></pre>
-<p>If you want to build it with debug flag (<code>-g3</code>), add <code>DEBUG=1</code> to the <code>make</code>
-command:</p>
-<pre><code class="language-sh">make DEBUG=1
-</code></pre>
-<h2><a class="header" href="#generating-the-documentation" id="generating-the-documentation">Generating the documentation</a></h2>
-<p>The library documentation is generated using Doxygen. A online version is
-available [here][doc].</p>
-<p>First, make sure the <code>./target</code> directory exists at the root of the repository.
-It is automatically created when building the library, but you can also use
-<code>mkdir</code>.</p>
-<h1><a class="header" href="#concepts" id="concepts">Concepts</a></h1>
-<p>This chapter will give you an overview of the different concepts you need to be
-familiar with to use <code>libgote</code>.
-Some of those concepts aren't specific to <code>libgote</code> and you will easily find
-more resource online about them: entity-component-system (ECS), game states and
-game assets.</p>
-<ul>
-<li><a href="concepts/state.html">State</a></li>
-<li><a href="concepts/world-resource.html">World and Resource</a></li>
-<li><a href="concepts/entity-component.html">Entity and Component</a></li>
-<li><a href="concepts/system.html">System</a></li>
-<li><a href="concepts/dispatcher.html">Dispatcher</a></li>
-<li><a href="concepts/event_channel.html">Event channel</a></li>
-<li><a href="concepts/asset_format.html">Asset format</a></li>
-</ul>
-<h1><a class="header" href="#state" id="state">State</a></h1>
-<h2><a class="header" href="#basics" id="basics">Basics</a></h2>
-<p>As described in <a href="https://gamedevelopment.tutsplus.com/articles/how-to-build-a-jrpg-a-primer-for-game-developers--gamedev-6676#state">this article</a>, a state (or game-state) represents a
-&quot;mode&quot; our game is in. For instance, we could separate an RPG in different
-game states:</p>
-<ul>
-<li>A &quot;local map&quot; state where the player can move around a terrain</li>
-<li>A &quot;world map&quot; state where a zoomed-out map of the world is displayed</li>
-<li>A &quot;combat&quot; state for fights!</li>
-<li>A &quot;pause menu&quot; state displaying the pause menu of the game</li>
-<li>...</li>
-</ul>
-<p><img src="concepts/jrpg-states-and-transistions.png" alt="Different game states and the transitions between them" /></p>
-<p>Essentially, every state has its own <code>start</code>, <code>stop</code> and <code>update</code> functions.</p>
-<h3><a class="header" href="#usage" id="usage">Usage</a></h3>
-<p>To create a state with the <code>libgote</code>, <strong>use <code>calloc</code></strong> to allocate a
-<code>gt_state_t</code> structure and set the callback functions you care about:</p>
-<pre><code class="language-c">gt_state_t *create_combat_state(void)
-{
-  gt_state_t *state = my_calloc(1, sizeof(gt_state_t));
-
-  state-&gt;update = &amp;combat_state_update;
-  return (state);
-}
-</code></pre>
-<p>Of course, <code>update</code> isn't the only callback available to game states. Here is
-a list of the most commonly used:</p>
-<ul>
-<li><strong>on_start</strong> - called when the state starts.</li>
-<li><strong>on_stop</strong> - called when the state stops.</li>
-<li><strong>update</strong> - called on every iteration of the game loop while the state is
-active.</li>
-<li><strong>destroy</strong> - called when the state is destroyed, use it to free the <code>self</code>
-field.</li>
-</ul>
-<p>The <code>libgote</code> will safely ignore any callback set to <code>NULL</code>. This is why <strong>you
-should use <code>calloc</code></strong> to allocate the <code>gt_state_t</code> structure (<code>calloc</code> ensures
-all the allocated bytes are set to <code>NULL</code> or <code>0</code>).</p>
-<p>The <code>self</code> field allows you to store arbitrary data associated with your state.
-Its value is passed as an argument to all the callbacks. In most cases, you will
-use it to keep a reference to data you want to clean-up when the state is
-stopped:</p>
-<pre><code class="language-c">/* Structure holding the data associated with the state */
-struct combat_state {
-  player_t *player;
-};
-
-/* Create the player when the state starts */
-static void combat_state_on_start(void *ptr, gt_world_t *world)
-{
-  struct combat_state *self = ptr;
-
-  self-&gt;player = player_create(world);
-}
-
-/* Remove the player when the state stops */
-static void combat_state_on_stop(void *ptr, gt_world_t *world)
-{
-  struct combat_state *self = ptr;
-
-  player_remove(self-&gt;player, world);
-}
-
-/* Create the state, its data structure, and set the callbacks */
-gt_state_t *create_combat_state(void)
-{
-  gt_state_t *state = my_calloc(1, sizeof(gt_state_t));
-
-  state-&gt;self = my_calloc(1, sizeof(struct combat_state));
-  state-&gt;destroy = &amp;my_free;
-  state-&gt;on_start = &amp;combat_state_on_start;
-  state-&gt;on_stop = &amp;combat_state_on_stop;
-  return (state);
-}
-</code></pre>
-<p><strong>Make sure not to forget to set <code>state-&gt;destroy</code> to an appropriate freeing
-function! If you don't do it, memory <em>WILL</em> leak!</strong></p>
-<h2><a class="header" href="#state-machine" id="state-machine">State machine</a></h2>
-<p>Game states are usually managed by something called a <strong>state machine</strong>. It is
-the one responsible for calling the right function at every iteration of the
-game loop. Only one state can be active at a time!</p>
-<p><img src="concepts/jrpg-state-machine.gif" alt="The state machine calls the update function of the currently active state" /></p>
-<p>The state machine is often implemented as a <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)">stack</a>, where states can be
-pushed and popped. The state at the top of the stack is the <strong>active state</strong>.</p>
-<p><img src="concepts/jrpg-state-stack.gif" alt="A game state beind pushed and then popped from the state machine" /></p>
-<h2><a class="header" href="#transitions" id="transitions">Transitions</a></h2>
-<p>A change in the state machine's stack is called a <strong>state transition</strong>. There
-are 4 different kinds of transitions in the <code>libgote</code>:</p>
-<ul>
-<li><strong>Push transitions</strong> - a state is pushed on top of the stack: it becomes the
-active state.</li>
-<li><strong>Pop transitions</strong> - the state on top of the stack is removed (the state
-below it, if any, becomes active).</li>
-<li><strong>Switch transitions</strong> - the state on top of the stack is replaced with
-another state.</li>
-<li><strong>Quit transitions</strong> - all the states are removed from the stack, killing the
-the state machine.</li>
-</ul>
-<p>As soon as the state stack becomes empty, the state machine is killed and the
-game is effectively terminated.</p>
-<h2><a class="header" href="#additionnal-callbacks" id="additionnal-callbacks">Additionnal callbacks</a></h2>
-<p>In the <code>libgote</code>, states have actually 3 extra callbacks I didn't mention yet.
-You might need them in some special cases:</p>
-<ul>
-<li><strong>on_pause</strong> - called when a state is pushed on top of the current one.</li>
-<li><strong>on_resume</strong> - called when the state above gets popped.</li>
-<li><strong>shadow_update</strong> - same as <code>update</code>, but is called on ALL the states in the
-stack.</li>
-</ul>
-<h1><a class="header" href="#world-and-resource" id="world-and-resource">World and Resource</a></h1>
-<h2><a class="header" href="#world" id="world">World</a></h2>
-<p>All the data global to your game is stored in what is called a &quot;World&quot;. That
-includes, for instance, all the entities of your game. Entities are covered in
-<a href="concepts/entity.html">their own chapter</a>.</p>
-<p>The world really is just a <a href="https://en.wikipedia.org/wiki/Hash_table">hash table</a> mapping keys (character
-strings) to <em>resources</em>.</p>
-<h2><a class="header" href="#resource" id="resource">Resource</a></h2>
-<p>What is a resource? Anything you want! The only requirement is that it must be
-a pointer. Other than that, you can have anything you want except for function
-pointers, because of the C language specification forbidding it. If you really
-need to store a function pointer in your World, wrap them in a heap-allocated
-structure and it will be fine!</p>
-<h2><a class="header" href="#usage-in-the-libgote" id="usage-in-the-libgote">Usage in the <code>libgote</code></a></h2>
-<h3><a class="header" href="#creating-a-new-world" id="creating-a-new-world">Creating a new world</a></h3>
-<p>You will rarely ever need to create or destroy a world directly (<code>libgote</code> does
-it for you when you create a <a href="https://nasso.io/libgote/doc/app_8h.html"><code>gt_app_t</code></a>). Though, here's how you
-would do it:</p>
-<pre><code class="language-c">// create a world this way:
-gt_world_t *world = gt_world_create();
-
-// destroy it when you're done!
-gt_world_destroy(world);
-</code></pre>
-<h3><a class="header" href="#resource-insertion" id="resource-insertion">Resource insertion</a></h3>
-<p>When inserting a resource in the world, you can optionally specify a destructor
-to be called when the resource is removed or the world destroyed:</p>
-<pre><code class="language-c">list_t *cool_stuff = list_from(3, &quot;furries&quot;, &quot;undertale&quot;, &quot;you&quot;);
-
-// the destroyer must be explicitly cast because C cannot implicitly cast
-// function pointers, even when they are compatible.
-gt_world_insert(world, &quot;cool_stuff&quot;, data, (void (*)(void*)) &amp;list_destroy);
-</code></pre>
-<p>For resources which do not need to be destroyed (i.e. static value), just set
-the destroyer to <code>NULL</code>:</p>
-<pre><code class="language-c">gt_world_insert(world, &quot;some_string&quot;, &quot;Hey! This is a resource!&quot;, NULL);
-</code></pre>
-<h3><a class="header" href="#resource-retrieval" id="resource-retrieval">Resource retrieval</a></h3>
-<p>Getting a resource from the world is straightforward:</p>
-<pre><code class="language-c">const char *my_resource = gt_world_get(world, &quot;some_string&quot;);
-
-my_printf(&quot;%s&quot;, my_resource); // &quot;Hey! This is a resource!&quot;
-</code></pre>
-<h3><a class="header" href="#resource-removal" id="resource-removal">Resource removal</a></h3>
-<p>Removing a resource from the world is, also, straightforward:</p>
-<pre><code class="language-c">gt_world_remove(world, &quot;some_string&quot;);
-</code></pre>
-<p>Note that <code>gt_world_remove</code> does <em>NOT</em> return anything! The resource is
-destroyed as soon as you remove it from the world.</p>
-<h1><a class="header" href="#entity-and-resource" id="entity-and-resource">Entity and Resource</a></h1>
+                        <h1><a class="header" href="#entity-and-resource" id="entity-and-resource">Entity and Resource</a></h1>
 <h2><a class="header" href="#entity" id="entity">Entity</a></h2>
 <p>An entity represents any object of your game. Examples of entities include the
 player, NPCs, an item, a button or a map. An entity doesn't hold any data (other
@@ -434,7 +228,7 @@ position_comp_t *position_component(f64_t x, f64_t y);
 }
 </code></pre>
 <h3><a class="header" href="#registering-components" id="registering-components">Registering components</a></h3>
-<p>Components are stored in <em>&quot;storages&quot;</em> kept as a <a href="concepts/world-resource.html#resource">Resource</a> in the <a href="concepts/world-resource.html#world">World</a>. Think
+<p>Components are stored in <em>&quot;storages&quot;</em> kept as a <a href="world-resource.html#resource">Resource</a> in the <a href="world-resource.html#world">World</a>. Think
 of a storage as a simple array (that's basically what they are anyway).  Keeping
 the table example from earlier, each component &quot;storage&quot; corresponds to a line
 of the table. That means there's one storage per component type.</p>
@@ -512,7 +306,7 @@ count!):</p>
 </code></pre>
 <h3><a class="header" href="#removing-the-entity" id="removing-the-entity">Removing the entity</a></h3>
 <p>When you're done using an entity, you have to manually remove it from the world!
-<a href="concepts/state.html">State</a>s do not know about the entities you've created, so they are not removed
+<a href="state.html">State</a>s do not know about the entities you've created, so they are not removed
 automatically!</p>
 <p>To remove entities, use the <a href="https://nasso.io/libgote/doc/world_8h.html#a1cdb28dd5c3b8de2a578aaf832abdebe"><code>gt_world_remove_entity</code></a> function:</p>
 <pre><code class="language-c">/* Remove the player entity when the state stops */
@@ -523,17 +317,21 @@ static void combat_state_on_stop(void *ptr, gt_world_t *world)
   gt_world_remove_entity(world, self-&gt;player);
 }
 </code></pre>
-<h1><a class="header" href="#system" id="system">System</a></h1>
-<h1><a class="header" href="#dispatcher" id="dispatcher">Dispatcher</a></h1>
-<h1><a class="header" href="#event-channel" id="event-channel">Event channel</a></h1>
-<h1><a class="header" href="#asset-format" id="asset-format">Asset format</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
+                            <a rel="prev" href="../concepts/world-resource.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
 
+                        
+                            <a rel="next" href="../concepts/system.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -543,7 +341,15 @@ static void combat_state_on_stop(void *ptr, gt_world_t *world)
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
+                    <a rel="prev" href="../concepts/world-resource.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
 
+                
+                    <a rel="next" href="../concepts/system.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                 
             </nav>
 
@@ -564,26 +370,18 @@ static void combat_state_on_stop(void *ptr, gt_world_t *world)
         
 
         
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
         
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
         
 
-        
-        
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
-        
         
 
     </body>
