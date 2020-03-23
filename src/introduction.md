@@ -46,7 +46,7 @@ make DEBUG=1
 ## Generating the documentation
 
 The library documentation is generated using Doxygen. A online version is
-available [here][doc].
+available [here][docs].
  
 First, make sure the `./target` directory exists at the root of the repository.
 It is automatically created when building the library, but you can also use
