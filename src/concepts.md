@@ -7,12 +7,9 @@ more resource online about them: entity-component-system (ECS), game states and
 game assets.
 
 - [State](concepts/state.md)
-- [Entity](concepts/entity.md)
-- [Component](concepts/component.md)
+- [World and Resource](concepts/world-resource.md)
+- [Entity and Component](concepts/entity-component.md)
 - [System](concepts/system.md)
 - [Dispatcher](concepts/dispatcher.md)
-- [Resource](concepts/resource.md)
-- [World](concepts/world.md)
-- [Storage](concepts/storage.md)
 - [Event channel](concepts/event_channel.md)
 - [Asset format](concepts/asset_format.md)
