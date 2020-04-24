@@ -29,6 +29,7 @@ void gt_asset_handle_free(gt_asset_handle_data_t *data);
 RC_DEFINE(gt_asset_handle_data_t, gt_asset_handle, gt_asset_handle_free)
 
 typedef RC(gt_asset_handle) gt_handle_t;
+typedef WRC(gt_asset_handle) gt_weak_handle_t;
 
 //! \brief Create a new \c gt_handle_t to an asset.
 //! \param id The ID of the asset in the storage.
@@ -49,6 +50,29 @@ static inline gt_handle_t gt_handle_clone(gt_handle_t self)
 static inline void gt_handle_drop(gt_handle_t self)
 {
     RC_DROP(gt_asset_handle)(self);
+}
+
+//! \brief Create a weak pointer to a \c gt_handle_t.
+//! \param self The \c gt_handle_t.
+//! \return A weak pointer to \c self.
+static inline gt_weak_handle_t gt_weak_handle(gt_handle_t self)
+{
+    return (RC_WEAK(gt_asset_handle)(self));
+}
+
+//! \brief Check whether or not a weak handle is still alive.
+//! \param self The \c gt_handle_t.
+//! \return \c true if the pointed handle still exists, \c false otherwise.
+static inline bool gt_weak_handle_is_alive(gt_weak_handle_t self)
+{
+    return (WRC_ALIVE(gt_asset_handle)(self));
+}
+
+//! \brief Drop a \c gt_weak_handle_t.
+//! \param self The \c gt_weak_handle_t to drop.
+static inline void gt_weak_handle_drop(gt_weak_handle_t self)
+{
+    WRC_DROP(gt_asset_handle)(self);
 }
 
 #endif /* LIBGOTE_ASSETS_HANDLE_H */
