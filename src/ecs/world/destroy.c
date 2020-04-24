@@ -10,7 +10,8 @@
 #include "gote/ecs/world.h"
 #include "gote/ecs/world_priv.h"
 
-static OPT(i32) destroy_resource_callback(void *user_data, hash_map_pair_t *pair)
+static OPT(i32) destroy_resource_callback(void *user_data,
+    hash_map_pair_t *pair)
 {
     gt_resource_t *res = pair->value;
 
