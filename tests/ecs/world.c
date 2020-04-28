@@ -249,3 +249,18 @@ Test(world, remove_entity_with_components)
     gt_world_destroy(wld);
     cr_assert_stdout_eq_str("health free;");
 }
+
+// Oh my god this one was painful
+Test(world, create_entity_after_deleting_first)
+{
+    gt_world_t *wld = gt_world_create();
+    gt_entity_t *first = gt_world_create_entity(wld, 0);
+    gt_entity_t *second = gt_world_create_entity(wld, 0);
+    gt_entity_t *third = gt_world_create_entity(wld, 0);
+
+    gt_world_remove_entity(wld, first);
+    first = gt_world_create_entity(wld, 0);
+    cr_assert_neq(first->id, second->id);
+    cr_assert_neq(first->id, third->id);
+    cr_assert_neq(second->id, third->id);
+}

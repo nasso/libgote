@@ -7,24 +7,31 @@
 
 #include <stdarg.h>
 #include "my/my.h"
+#include "my/collections/list.h"
 #include "gote/gote.h"
 
-static list_node_t *assign_slot(gt_world_t *self, gt_entity_t *ent)
+static u64_t get_first_available_id(list_t *entities)
 {
-    list_node_t *n = self->entities->head;
+    gt_entity_t *ent = NULL;
+    u64_t id = 0;
 
-    if (ent == NULL)
-        return (NULL);
-    ent->id = 0;
-    while (ent->id < self->entities->len) {
-        if (n->val == NULL)
-            return (n);
-        n = n->next;
-        ent->id++;
+    LIST_FOR_EACH(entities, iter) {
+        ent = iter.v;
+        if (ent->id != id)
+            return (id);
+        id++;
     }
-    if (list_push_back(self->entities, NULL))
-        return (NULL);
-    return (self->entities->head->previous);
+    return (id);
+}
+
+static bool add_entity(gt_world_t *self, gt_entity_t *ent)
+{
+    if (ent == NULL)
+        return (true);
+    ent->id = get_first_available_id(self->entities);
+    if (ent->id >= self->entities->len)
+        return (list_push_back(self->entities, ent));
+    return (list_insert(self->entities, ent->id, ent));
 }
 
 static bool put_component(gt_world_t *self, u64_t id,
@@ -53,15 +60,13 @@ gt_entity_t *gt_world_create_entity_va(gt_world_t *self,
     usize_t component_count, va_list ap)
 {
     gt_entity_t *ent = my_malloc(sizeof(gt_entity_t));
-    list_node_t *slot = assign_slot(self, ent);
     const gt_component_class_t *class = NULL;
     void *component_data = NULL;
 
-    if (ent == NULL || slot == NULL) {
+    if (ent == NULL || add_entity(self, ent)) {
         my_free(ent);
         return (NULL);
     }
-    slot->val = ent;
     for (usize_t i = 0; i < component_count; i++) {
         class = va_arg(ap, const gt_component_class_t*);
         component_data = va_arg(ap, void*);
