@@ -264,3 +264,19 @@ Test(world, create_entity_after_deleting_first)
     cr_assert_neq(first->id, third->id);
     cr_assert_neq(second->id, third->id);
 }
+
+Test(world, create_entity_when_first_entity_has_big_id)
+{
+    gt_world_t *wld = gt_world_create();
+    gt_entity_t *first = gt_world_create_entity(wld, 0);
+    gt_entity_t *second = gt_world_create_entity(wld, 0);
+    gt_entity_t *third = gt_world_create_entity(wld, 0);
+
+    gt_world_remove_entity(wld, first);
+    gt_world_remove_entity(wld, second);
+    first = gt_world_create_entity(wld, 0);
+    second = gt_world_create_entity(wld, 0);
+    cr_assert_neq(first->id, second->id);
+    cr_assert_neq(first->id, third->id);
+    cr_assert_neq(second->id, third->id);
+}
