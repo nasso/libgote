@@ -1,27 +1,18 @@
 var indexSectionsWithContent =
 {
-  0: "acdefghlmstw",
-  1: "g",
-  2: "acdefghlmstw",
-  3: "g",
-  4: "g"
+  0: "g",
+  1: "g"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "classes",
-  2: "files",
-  3: "functions",
-  4: "typedefs"
+  1: "classes"
 };
 
 var indexSectionLabels =
 {
   0: "All",
-  1: "Classes",
-  2: "Files",
-  3: "Functions",
-  4: "Typedefs"
+  1: "Classes"
 };
 
