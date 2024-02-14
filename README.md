@@ -3,7 +3,7 @@ C library providing a general set of classes and data structures for use by game
 
 ## Documentation
 
-See the [API documentation](https://nasso.io/libgote/doc/) and the [book](https://nasso.io/libgote/book/).
+See the [API documentation](https://nasso.github.io/libgote/doc/) and the [book](https://nasso.github.io/libgote/book/).
 
 ## Features
 
